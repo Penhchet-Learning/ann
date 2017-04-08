@@ -39,6 +39,5 @@ Layer::Layer(int size) {
 }
 
 void Layer::setVal(int i, double v) {
-  Neuron *n = new Neuron(v);
   this->neurons.at(i)->setVal(v);
 }
