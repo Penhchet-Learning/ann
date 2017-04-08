@@ -5,11 +5,11 @@ void NeuralNetwork::feedForward() {
     Matrix *a = this->getNeuronMatrix(i);
 
     if(i != 0) {
-      *a = this->getActivatedNeuronMatrix(i);
+      a = this->getActivatedNeuronMatrix(i);
     }
 
     Matrix *b = this->getWeightMatrix(i);
-    Matrix *c = (new ::utils::MultiplyMatrix(a, b))->execute();
+    Matrix *c = (new utils::MultiplyMatrix(a, b))->execute();
 
     vector<double> vals;
     for(int c_index = 0; c_index < c->getNumCols(); c_index++) {

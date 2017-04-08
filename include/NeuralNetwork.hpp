@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include "utils/MultiplyMatrix.hpp"
 #include "Matrix.hpp"
 #include "Layer.hpp"
 
