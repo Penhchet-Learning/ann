@@ -6,8 +6,8 @@ void NeuralNetwork::setErrors() {
     assert(false);
   }
 
-  if(this->target.size() != this->layers.at(this->layers.size() - 1).size) {
-    cerr << "Target size is not the same as output layer size" << endl;
+  if(this->target.size() != this->layers.at(this->layers.size() - 1)->getNeurons().size()) {
+    cerr << "Target size is not the same as output layer size: " << this->layers.at(this->layers.size() - 1)->getNeurons().size() << endl;
     assert(false);
   }
 
@@ -20,7 +20,7 @@ void NeuralNetwork::setErrors() {
     this->error += tempErr;
   }
 
-  historicalErrors.push_back(this-error);
+  historicalErrors.push_back(this->error);
 }
 
 void NeuralNetwork::feedForward() {
