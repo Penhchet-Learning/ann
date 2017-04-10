@@ -1,5 +1,28 @@
 #include "../include/NeuralNetwork.hpp"
 
+void NeuralNetwork::setErrors() {
+  if(this->target.size() == 0) {
+    cerr << "No target for this neural network" << endl;
+    assert(false);
+  }
+
+  if(this->target.size() != this->layers.at(this->layers.size() - 1).size) {
+    cerr << "Target size is not the same as output layer size" << endl;
+    assert(false);
+  }
+
+  this->error = 0.00;
+  int outputLayerIndex  = this->layers.size() - 1;
+  vector<Neuron *> outputNeurons  = this->layers.at(outputLayerIndex)->getNeurons();
+  for(int i = 0; i < target.size(); i++) {
+    double tempErr  = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
+    errors.at(i) = tempErr;
+    this->error += tempErr;
+  }
+
+  historicalErrors.push_back(this-error);
+}
+
 void NeuralNetwork::feedForward() {
   for(int i = 0; i < (this->layers.size() - 1); i++) {
     Matrix *a = this->getNeuronMatrix(i);
@@ -58,4 +81,11 @@ NeuralNetwork::NeuralNetwork(vector<int> topology) {
 
     this->weightMatrices.push_back(m);
   }
+
+  // Initialize empty errors
+  for(int i = 0; i < topology.at(topology.size() - 1); i++) {
+    errors.push_back(0.00);
+  }
+
+  this->error = 0.00;
 }
