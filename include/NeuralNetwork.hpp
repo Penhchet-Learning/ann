@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "utils/MultiplyMatrix.hpp"
 #include "Matrix.hpp"
 #include "Layer.hpp"
@@ -16,6 +17,7 @@ public:
   void setCurrentInput(vector<double> input);
   void setCurrentTarget(vector<double> target) { this->target = target; };
   void feedForward();
+  void backPropagation();
   void printToConsole();
   void setErrors();
 
@@ -33,6 +35,7 @@ private:
   vector<int>       topology;
   vector<Layer *>   layers;
   vector<Matrix *>  weightMatrices;
+  vector<Matrix *>  gradientMatrices;
   vector<double>    input;
   vector<double>    target;
   double            error;
