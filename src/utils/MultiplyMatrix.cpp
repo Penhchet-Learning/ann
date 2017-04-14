@@ -20,6 +20,7 @@ Matrix *utils::MultiplyMatrix::execute() {
         double  newVal  = this->c->getValue(i, j) + p;
         this->c->setValue(i, j, newVal);
       }
+      this->c->setValue(i, j, this->c->getValue(i, j));
     }
   }
 
