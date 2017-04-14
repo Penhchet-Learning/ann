@@ -103,6 +103,41 @@ void NeuralNetwork::backPropagation() {
   this->weightMatrices = newWeights;
 }
 
+void NeuralNetwork::printInputToConsole() {
+  for(int i = 0; i < this->input.size(); i++) {
+    cout << this->input.at(i) << "\t";
+  }
+
+  cout << endl;
+}
+
+void NeuralNetwork::printTargetToConsole() {
+  for(int i = 0; i < this->target.size(); i++) {
+    cout << this->target.at(i) << "\t";
+  }
+
+  cout << endl;
+}
+
+void NeuralNetwork::printHistoricalErrors() {
+  for(int i = 0; i < this->historicalErrors.size(); i++) {
+    cout << this->historicalErrors.at(i);
+    if(i != this->historicalErrors.size() - 1) {
+      cout << ",";
+    }
+  }
+  cout << endl;
+}
+
+void NeuralNetwork::printOutputToConsole() {
+  int indexOfOutputLayer  = this->layers.size() - 1;
+  Matrix *outputValues    = this->layers.at(indexOfOutputLayer)->matrixifyActivatedVals();
+  for(int c = 0; c < outputValues->getNumCols(); c++) {
+    cout << outputValues->getValue(0, c) << "\t";
+  }
+  cout << endl;
+}
+
 void NeuralNetwork::setErrors() {
   if(this->target.size() == 0) {
     cerr << "No target for this neural network" << endl;
@@ -119,9 +154,12 @@ void NeuralNetwork::setErrors() {
   vector<Neuron *> outputNeurons  = this->layers.at(outputLayerIndex)->getNeurons();
   for(int i = 0; i < target.size(); i++) {
     double tempErr  = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
+    //double tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
     errors.at(i) = tempErr;
-    this->error += tempErr;
+    this->error += pow(tempErr, 2);
   }
+
+  this->error = 0.5 * this->error;
 
   historicalErrors.push_back(this->error);
 }
