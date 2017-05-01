@@ -1,48 +1,50 @@
 #include <iostream>
 #include <vector>
+#include <thread>
+#include <stdio.h>
+#include <fstream>
+#include <streambuf>
+#include "../include/json.hpp"
 #include "../include/Neuron.hpp"
 #include "../include/Matrix.hpp"
 #include "../include/NeuralNetwork.hpp"
 #include "../include/utils/MultiplyMatrix.hpp"
+#include "../include/utils/FetchCSVData.hpp"
 
 using namespace std;
+using json = nlohmann::json;
 
 int main(int argc, char **argv) {
-  vector<double> input;
-  input.push_back(1);
-  input.push_back(0);
-  input.push_back(1);
+  ifstream configFile(argv[1]);
+  string str((std::istreambuf_iterator<char>(configFile)),
+              std::istreambuf_iterator<char>());
 
-  vector<int> topology;
-  topology.push_back(3);
-  topology.push_back(2);
-  topology.push_back(3);
+  auto configJson = json::parse(str);
 
+  vector<int> topology  = configJson["topology"];
+  int epochThreshold    = configJson["epochThreshold"];
+  string trainingData   = configJson["trainingData"];
+  string labelData      = configJson["labelData"];
+
+  cout << "Initializing neural network..." << endl;
   NeuralNetwork *nn = new NeuralNetwork(topology);
-  nn->setCurrentInput(input);
-  nn->setCurrentTarget(input);
+  cout << "Done initializing neural network..." << endl;
 
-  // training process
-  for(int i = 0; i < 1000; i++) {
-  //int i = 0;
-  //while(true) {
-    cout << "Epoch: " << i << endl;
-    nn->feedForward();
-    nn->setErrors();
-    cout << "Total Error: " << nn->getTotalError() << endl;
-    nn->backPropagation();
+  cout << "Starting training..." << endl;
+  int epoch = 1;
+  while(epoch <= epochThreshold) {
+    cout << "Epoch: " << epoch << endl;
 
-    cout << "========================" << endl;
-    cout << "OUTPUT: ";
-    nn->printOutputToConsole();
+    vector<vector<double> > data  = (new utils::FetchCSVData(trainingData))->execute();
+    cout << "Error:" << endl;
+    for(int i = 0; i < data.size(); i++) {
+      nn->train(data.at(i), data.at(i));
+      cout << nn->getTotalError() << endl;
+    }
 
-    cout << "TARGET: ";
-    nn->printTargetToConsole();
-    cout << "========================" << endl;
-    cout << endl;
+    cout << "Total Error for epoch " << epoch << ": " << nn->getTotalError() << endl;
+    epoch++;
   }
-
-  nn->printHistoricalErrors();
 
   return 0;
 }

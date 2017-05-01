@@ -2,6 +2,8 @@
 #define _NEURAL_NETWORK_HPP_
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <algorithm>
 #include "utils/MultiplyMatrix.hpp"
@@ -28,12 +30,16 @@ public:
 
   void setNeuronValue(int indexLayer, int indexNeuron, double val) { this->layers.at(indexLayer)->setVal(indexNeuron, val); };
 
+  void setTrainingData(string filename);
+  void setLabelData(string filename);
+
   double getTotalError() { return this->error; };
   vector<double> getErrors() { return this->errors; };
   void printInputToConsole();
   void printOutputToConsole();
   void printTargetToConsole();
   void printHistoricalErrors();
+  void train(vector<double> input, vector<double> target);
 private:
   int               topologySize;
   vector<int>       topology;
@@ -45,6 +51,9 @@ private:
   double            error;
   vector<double>    errors;
   vector<double>    historicalErrors;
+
+  vector<vector<double> > trainingData;
+  vector<vector<double> > labelData;
 };
 
 #endif

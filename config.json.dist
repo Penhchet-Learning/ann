@@ -1,0 +1,5 @@
+{
+  "topology": [4, 2, 4],
+  "trainingData": "/home/ralampay/workspace/openann/trainingData.csv",
+  "labelData": "/home/ralampay/workspace/openann/labelData.csv"
+}

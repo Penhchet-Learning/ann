@@ -21,3 +21,9 @@ data/
 
 # ignore jpg files produced by programs
 *.jpg
+
+# config file
+config.json
+
+# ignore csv file
+*.csv
