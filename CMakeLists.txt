@@ -13,6 +13,7 @@ add_executable(
   src/Layer.cpp
   src/NeuralNetwork/NeuralNetwork.cpp
   src/NeuralNetwork/backPropagation.cpp
+  src/NeuralNetwork/feedForward.cpp
   src/utils/MultiplyMatrix.cpp
   src/utils/FetchCSVData.cpp
 )

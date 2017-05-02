@@ -15,7 +15,7 @@ using namespace std;
 class NeuralNetwork
 {
 public:
-  NeuralNetwork(vector<int> topology);
+  NeuralNetwork(vector<int> topology, double momentum, double learningRate);
   void setCurrentInput(vector<double> input);
   void setCurrentTarget(vector<double> target) { this->target = target; };
   void feedForward();
@@ -28,7 +28,7 @@ public:
   Matrix *getDerivedNeuronMatrix(int index) { return this->layers.at(index)->matrixifyDerivedVals(); };
   Matrix *getWeightMatrix(int index) { return this->weightMatrices.at(index); };
 
-  void setNeuronValue(int indexLayer, int indexNeuron, double val) { this->layers.at(indexLayer)->setVal(indexNeuron, val); };
+  void setNeuronValue(int indexLayer, int indexNeuron, double val, bool isOutputLayer) { this->layers.at(indexLayer)->setVal(indexNeuron, val, isOutputLayer); };
 
   void setTrainingData(string filename);
   void setLabelData(string filename);
@@ -48,7 +48,9 @@ private:
   vector<Matrix *>  gradientMatrices;
   vector<double>    input;
   vector<double>    target;
-  double            error;
+  double             error;
+  double             momentum;
+  double             learningRate;
   vector<double>    errors;
   vector<double>    historicalErrors;
 

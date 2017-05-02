@@ -11,15 +11,13 @@ public:
 
   Neuron(double val);
 
-  void setVal(double v);
+  void setVal(double v, bool useFastSigmoid);
 
-  // Fast Sigmoid Function
-  // f(x) = x / (1 + |x|)
   void activate();
+  void activateFastSigmoid();
 
-  // Derivative for fast sigmoid function
-  // f'(x) = f(x) * (1 - f(x))
   void derive();
+  void deriveFastSigmoid();
 
   // Getter
   double getVal() { return this->val; }

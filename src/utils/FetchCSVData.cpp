@@ -10,7 +10,7 @@ utils::FetchCSVData::FetchCSVData(string filename) {
     stringstream    ss(line);
 
     while(getline(ss, tok, ',')) {
-      dRow.push_back(stod(tok));
+      dRow.push_back(stof(tok));
     }
 
     data.push_back(dRow);

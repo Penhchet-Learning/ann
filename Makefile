@@ -231,6 +231,33 @@ src/NeuralNetwork/backPropagation.cpp.s:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/backPropagation.cpp.s
 .PHONY : src/NeuralNetwork/backPropagation.cpp.s
 
+src/NeuralNetwork/feedForward.o: src/NeuralNetwork/feedForward.cpp.o
+
+.PHONY : src/NeuralNetwork/feedForward.o
+
+# target to build an object file
+src/NeuralNetwork/feedForward.cpp.o:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.o
+.PHONY : src/NeuralNetwork/feedForward.cpp.o
+
+src/NeuralNetwork/feedForward.i: src/NeuralNetwork/feedForward.cpp.i
+
+.PHONY : src/NeuralNetwork/feedForward.i
+
+# target to preprocess a source file
+src/NeuralNetwork/feedForward.cpp.i:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.i
+.PHONY : src/NeuralNetwork/feedForward.cpp.i
+
+src/NeuralNetwork/feedForward.s: src/NeuralNetwork/feedForward.cpp.s
+
+.PHONY : src/NeuralNetwork/feedForward.s
+
+# target to generate assembly for a file
+src/NeuralNetwork/feedForward.cpp.s:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.s
+.PHONY : src/NeuralNetwork/feedForward.cpp.s
+
 src/Neuron.o: src/Neuron.cpp.o
 
 .PHONY : src/Neuron.o
@@ -360,6 +387,9 @@ help:
 	@echo "... src/NeuralNetwork/backPropagation.o"
 	@echo "... src/NeuralNetwork/backPropagation.i"
 	@echo "... src/NeuralNetwork/backPropagation.s"
+	@echo "... src/NeuralNetwork/feedForward.o"
+	@echo "... src/NeuralNetwork/feedForward.i"
+	@echo "... src/NeuralNetwork/feedForward.s"
 	@echo "... src/Neuron.o"
 	@echo "... src/Neuron.i"
 	@echo "... src/Neuron.s"
