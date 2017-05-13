@@ -1,6 +1,6 @@
 #include "../../include/NeuralNetwork.hpp"
 
-void NeuralNetwork::feedForward(double bias) {
+void NeuralNetwork::feedForward() {
   Matrix *a;
   Matrix *b;
   Matrix *c;
@@ -19,9 +19,9 @@ void NeuralNetwork::feedForward(double bias) {
 
     for(int c_index = 0; c_index < c->getNumCols(); c_index++) {
       if(i == (this->layers.size() - 2)) {
-        this->setNeuronValue(i + 1, c_index, c->getValue(0, c_index) + bias, false);
+        this->setNeuronValue(i + 1, c_index, c->getValue(0, c_index) + this->bias);
       } else {
-        this->setNeuronValue(i + 1, c_index, c->getValue(0, c_index) + bias, false);
+        this->setNeuronValue(i + 1, c_index, c->getValue(0, c_index) + this->bias);
       }
     }
 

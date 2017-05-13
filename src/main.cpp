@@ -27,13 +27,12 @@ int main(int argc, char **argv) {
   int epochThreshold    = configJson["epochThreshold"];
   string trainingData   = configJson["trainingData"];
   string labelData      = configJson["labelData"];
-  string aveHistErrorFile = configJson["aveHistErrorFile"];
-  double momentum        = configJson["momentum"];
-  double learningRate    = configJson["learningRate"];
+  double momentum       = configJson["momentum"];
+  double learningRate   = configJson["learningRate"];
   double bias           = configJson["bias"];
 
   cout << "Initializing neural network..." << endl;
-  NeuralNetwork *nn = new NeuralNetwork(topology, momentum, learningRate);
+  NeuralNetwork *nn = new NeuralNetwork(topology);
   cout << "Done initializing neural network..." << endl;
 
   cout << "Starting training..." << endl;
@@ -48,8 +47,7 @@ int main(int argc, char **argv) {
     vector<vector<double> > labels = (new utils::FetchCSVData(labelData))->execute();
     t = clock();
     for(int i = 0; i < data.size(); i++) {
-      nn->train(data.at(i), labels.at(i), bias);
-      //cout << "Error for DP " << i << ": " << nn->getTotalError() << "\r";
+      nn->train(data.at(i), labels.at(i), bias, learningRate, momentum);
       aveError += nn->getTotalError();
     }
 
@@ -58,21 +56,10 @@ int main(int argc, char **argv) {
     histAveError.push_back(aveError);
     cout << aveError << endl;
     t = clock() - t;
-    printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
+    //printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
 
     epoch++;
   }
-
-  ofstream writer;
-  writer.open(aveHistErrorFile);
-  for(int i = 0; i < histAveError.size(); i++) {
-    writer << histAveError.at(i);
-    if(i != histAveError.size() - 1) {
-      writer << ",";
-    }
-  }
-  writer << endl;
-  writer.close();
 
   return 0;
 }

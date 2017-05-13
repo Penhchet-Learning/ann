@@ -1,19 +1,5 @@
 #include "../../include/NeuralNetwork.hpp"
 
-void NeuralNetwork::train(vector<double> input, vector<double> target, double bias) {
-  clock_t t;
-  this->setCurrentInput(input);
-  this->setCurrentTarget(target);
-  t = clock();
-  this->feedForward(bias);
-  t = clock() - t;
-  printf ("FF: %f seconds.\n",t,((float)t)/CLOCKS_PER_SEC);
-  this->setErrors();
-  t = clock() - t;
-  this->backPropagation();
-  printf ("BP: %f seconds.\n",t,((float)t)/CLOCKS_PER_SEC);
-}
-
 void NeuralNetwork::setLabelData(string filename) {
   labelData.clear();
   ifstream infile(filename);
@@ -108,15 +94,21 @@ void NeuralNetwork::setCurrentInput(vector<double> input) {
   this->input = input;
 
   for(int i = 0; i < input.size(); i++) {
-    this->layers.at(0)->setVal(i, input.at(i), false);
+    this->layers.at(0)->setVal(i, input.at(i));
   }
 }
 
-NeuralNetwork::NeuralNetwork(vector<int> topology, double momentum, double learningRate) {
+NeuralNetwork::NeuralNetwork(
+  vector<int> topology, 
+  double bias,
+  double learningRate, 
+  double momentum
+) {
   this->topology      = topology;
   this->topologySize  = topology.size();
   this->learningRate  = learningRate;
   this->momentum      = momentum;
+  this->bias          = bias;
 
   for(int i = 0; i < topologySize; i++) {
     Layer *l  = new Layer(topology.at(i));

@@ -38,6 +38,6 @@ Layer::Layer(int size) {
   }
 }
 
-void Layer::setVal(int i, double v, bool isOutputLayer) {
-  this->neurons.at(i)->setVal(v, isOutputLayer);
+void Layer::setVal(int i, double v) {
+  this->neurons.at(i)->setVal(v);
 }

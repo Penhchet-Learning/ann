@@ -285,6 +285,33 @@ src/NeuralNetwork/setErrors.cpp.s:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/setErrors.cpp.s
 .PHONY : src/NeuralNetwork/setErrors.cpp.s
 
+src/NeuralNetwork/train.o: src/NeuralNetwork/train.cpp.o
+
+.PHONY : src/NeuralNetwork/train.o
+
+# target to build an object file
+src/NeuralNetwork/train.cpp.o:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/train.cpp.o
+.PHONY : src/NeuralNetwork/train.cpp.o
+
+src/NeuralNetwork/train.i: src/NeuralNetwork/train.cpp.i
+
+.PHONY : src/NeuralNetwork/train.i
+
+# target to preprocess a source file
+src/NeuralNetwork/train.cpp.i:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/train.cpp.i
+.PHONY : src/NeuralNetwork/train.cpp.i
+
+src/NeuralNetwork/train.s: src/NeuralNetwork/train.cpp.s
+
+.PHONY : src/NeuralNetwork/train.s
+
+# target to generate assembly for a file
+src/NeuralNetwork/train.cpp.s:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/train.cpp.s
+.PHONY : src/NeuralNetwork/train.cpp.s
+
 src/Neuron.o: src/Neuron.cpp.o
 
 .PHONY : src/Neuron.o
@@ -420,6 +447,9 @@ help:
 	@echo "... src/NeuralNetwork/setErrors.o"
 	@echo "... src/NeuralNetwork/setErrors.i"
 	@echo "... src/NeuralNetwork/setErrors.s"
+	@echo "... src/NeuralNetwork/train.o"
+	@echo "... src/NeuralNetwork/train.i"
+	@echo "... src/NeuralNetwork/train.s"
 	@echo "... src/Neuron.o"
 	@echo "... src/Neuron.i"
 	@echo "... src/Neuron.s"

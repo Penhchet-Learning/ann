@@ -10,7 +10,7 @@ class Layer
 {
 public:
   Layer(int size);
-  void setVal(int i, double v, bool isOutputLayer);
+  void setVal(int i, double v);
 
   Matrix *matrixifyVals();
   Matrix *matrixifyActivatedVals();

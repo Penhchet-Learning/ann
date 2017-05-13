@@ -15,6 +15,7 @@ add_executable(
   src/NeuralNetwork/backPropagation.cpp
   src/NeuralNetwork/feedForward.cpp
   src/NeuralNetwork/setErrors.cpp
+  src/NeuralNetwork/train.cpp
   src/utils/MultiplyMatrix.cpp
   src/utils/FetchCSVData.cpp
 )

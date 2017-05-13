@@ -17,10 +17,16 @@ using namespace utils;
 class NeuralNetwork
 {
 public:
-  NeuralNetwork(vector<int> topology, double momentum, double learningRate);
+  NeuralNetwork(
+    vector<int> topology, 
+    double bias = 1,
+    double learningRate = 0.05, 
+    double momentum = 1
+  );
+
   void setCurrentInput(vector<double> input);
   void setCurrentTarget(vector<double> target) { this->target = target; };
-  void feedForward(double bias);
+  void feedForward();
   void backPropagation();
   void printToConsole();
   void setErrors();
@@ -30,7 +36,7 @@ public:
   Matrix *getDerivedNeuronMatrix(int index) { return this->layers.at(index)->matrixifyDerivedVals(); };
   Matrix *getWeightMatrix(int index) { return new Matrix(*this->weightMatrices.at(index)); };
 
-  void setNeuronValue(int indexLayer, int indexNeuron, double val, bool isOutputLayer) { this->layers.at(indexLayer)->setVal(indexNeuron, val, isOutputLayer); };
+  void setNeuronValue(int indexLayer, int indexNeuron, double val) { this->layers.at(indexLayer)->setVal(indexNeuron, val); };
 
   void setTrainingData(string filename);
   void setLabelData(string filename);
@@ -41,7 +47,14 @@ public:
   void printOutputToConsole();
   void printTargetToConsole();
   void printHistoricalErrors();
-  void train(vector<double> input, vector<double> target, double bias);
+
+  void train(
+    vector<double> input, 
+    vector<double> target, 
+    double bias = 1,
+    double learningRate = 0.05, 
+    double momentum = 1
+  );
 private:
   int               topologySize;
   vector<int>       topology;
@@ -50,9 +63,10 @@ private:
   vector<Matrix *>  gradientMatrices;
   vector<double>    input;
   vector<double>    target;
-  double             error;
-  double             momentum;
-  double             learningRate;
+  double            error;
+  double            momentum;
+  double            learningRate;
+  double            bias;
   vector<double>    errors;
   vector<double>    historicalErrors;
 

@@ -11,7 +11,7 @@ public:
 
   Neuron(double val);
 
-  void setVal(double v, bool useFastSigmoid);
+  void setVal(double v);
 
   void activate();
   void activateFastSigmoid();
