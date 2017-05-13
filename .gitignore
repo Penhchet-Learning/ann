@@ -19,11 +19,9 @@ config.yaml
 # ignore data files
 data/
 
-# ignore jpg files produced by programs
 *.jpg
-
-# config file
-config.json
+*.json
+massif*
 
 # ignore csv file
 *.csv
