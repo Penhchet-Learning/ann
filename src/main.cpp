@@ -31,6 +31,7 @@ int main(int argc, char **argv) {
   double learningRate   = configJson["learningRate"];
   double bias           = configJson["bias"];
   string mode           = configJson["mode"];
+  string outputWeights  = configJson["outputWeights"];
 
   cout << "Initializing neural network..." << endl;
   NeuralNetwork *nn = new NeuralNetwork(topology, mode);
@@ -61,6 +62,8 @@ int main(int argc, char **argv) {
 
     epoch++;
   }
+
+  nn->saveWeights(outputWeights);
 
   return 0;
 }

@@ -23,6 +23,8 @@ public:
 
   int getNumRows() { return this->numRows; }
   int getNumCols() { return this->numCols; }
+
+  vector< vector<double> > getValues() { return this->values; }
 private:
   int numRows;
   int numCols;

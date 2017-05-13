@@ -10,9 +10,11 @@
 #include "utils/MultiplyMatrix.hpp"
 #include "Matrix.hpp"
 #include "Layer.hpp"
+#include "../include/json.hpp"
 
 using namespace std;
 using namespace utils;
+using json = nlohmann::json;
 
 class NeuralNetwork
 {
@@ -48,6 +50,8 @@ public:
   void printOutputToConsole();
   void printTargetToConsole();
   void printHistoricalErrors();
+
+  void saveWeights(string filename);  // Saves weights as a json file
 
   void train(
     vector<double> input, 
