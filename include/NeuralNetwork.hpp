@@ -19,6 +19,7 @@ class NeuralNetwork
 public:
   NeuralNetwork(
     vector<int> topology, 
+    string mode,
     double bias = 1,
     double learningRate = 0.05, 
     double momentum = 1

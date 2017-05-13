@@ -30,9 +30,10 @@ int main(int argc, char **argv) {
   double momentum       = configJson["momentum"];
   double learningRate   = configJson["learningRate"];
   double bias           = configJson["bias"];
+  string mode           = configJson["mode"];
 
   cout << "Initializing neural network..." << endl;
-  NeuralNetwork *nn = new NeuralNetwork(topology);
+  NeuralNetwork *nn = new NeuralNetwork(topology, mode);
   cout << "Done initializing neural network..." << endl;
 
   cout << "Starting training..." << endl;

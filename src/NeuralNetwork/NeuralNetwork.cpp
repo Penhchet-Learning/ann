@@ -98,8 +98,10 @@ void NeuralNetwork::setCurrentInput(vector<double> input) {
   }
 }
 
+// Constructor
 NeuralNetwork::NeuralNetwork(
   vector<int> topology, 
+  string mode,
   double bias,
   double learningRate, 
   double momentum
@@ -109,6 +111,18 @@ NeuralNetwork::NeuralNetwork(
   this->learningRate  = learningRate;
   this->momentum      = momentum;
   this->bias          = bias;
+
+  // Check for autoencoder mode
+  if(mode.compare("autoencoder") == 0) {
+    if(this->topology.size() % 2 == 0) {
+      cerr << "Invalid topology. Should be odd number in size" << endl;
+      exit(-1);
+    }
+  //} else if(mode.compare("classifier") == 0) {
+  } else {
+    cerr << "Invalid mode " << mode << endl;
+    exit(-1);
+  }
 
   for(int i = 0; i < topologySize; i++) {
     Layer *l  = new Layer(topology.at(i));
