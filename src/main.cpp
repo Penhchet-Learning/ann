@@ -5,6 +5,7 @@
 #include <fstream>
 #include <streambuf>
 #include <ostream>
+#include <time.h>
 #include "../include/json.hpp"
 #include "../include/Neuron.hpp"
 #include "../include/Matrix.hpp"
@@ -29,6 +30,7 @@ int main(int argc, char **argv) {
   string aveHistErrorFile = configJson["aveHistErrorFile"];
   double momentum        = configJson["momentum"];
   double learningRate    = configJson["learningRate"];
+  double bias           = configJson["bias"];
 
   cout << "Initializing neural network..." << endl;
   NeuralNetwork *nn = new NeuralNetwork(topology, momentum, learningRate);
@@ -38,12 +40,15 @@ int main(int argc, char **argv) {
   int epoch = 1;
 
   vector<double> histAveError;
+  clock_t t;
   while(epoch <= epochThreshold) {
     double aveError = 0;
 
     vector<vector<double> > data  = (new utils::FetchCSVData(trainingData))->execute();
+    vector<vector<double> > labels = (new utils::FetchCSVData(labelData))->execute();
+    t = clock();
     for(int i = 0; i < data.size(); i++) {
-      nn->train(data.at(i), data.at(i));
+      nn->train(data.at(i), labels.at(i), bias);
       //cout << "Error for DP " << i << ": " << nn->getTotalError() << "\r";
       aveError += nn->getTotalError();
     }
@@ -52,6 +57,8 @@ int main(int argc, char **argv) {
 
     histAveError.push_back(aveError);
     cout << aveError << endl;
+    t = clock() - t;
+    printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
 
     epoch++;
   }

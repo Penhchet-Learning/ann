@@ -6,11 +6,13 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <time.h>
 #include "utils/MultiplyMatrix.hpp"
 #include "Matrix.hpp"
 #include "Layer.hpp"
 
 using namespace std;
+using namespace utils;
 
 class NeuralNetwork
 {
@@ -18,7 +20,7 @@ public:
   NeuralNetwork(vector<int> topology, double momentum, double learningRate);
   void setCurrentInput(vector<double> input);
   void setCurrentTarget(vector<double> target) { this->target = target; };
-  void feedForward();
+  void feedForward(double bias);
   void backPropagation();
   void printToConsole();
   void setErrors();
@@ -26,7 +28,7 @@ public:
   Matrix *getNeuronMatrix(int index) { return this->layers.at(index)->matrixifyVals(); };
   Matrix *getActivatedNeuronMatrix(int index) { return this->layers.at(index)->matrixifyActivatedVals(); };
   Matrix *getDerivedNeuronMatrix(int index) { return this->layers.at(index)->matrixifyDerivedVals(); };
-  Matrix *getWeightMatrix(int index) { return this->weightMatrices.at(index); };
+  Matrix *getWeightMatrix(int index) { return new Matrix(*this->weightMatrices.at(index)); };
 
   void setNeuronValue(int indexLayer, int indexNeuron, double val, bool isOutputLayer) { this->layers.at(indexLayer)->setVal(indexNeuron, val, isOutputLayer); };
 
@@ -39,7 +41,7 @@ public:
   void printOutputToConsole();
   void printTargetToConsole();
   void printHistoricalErrors();
-  void train(vector<double> input, vector<double> target);
+  void train(vector<double> input, vector<double> target, double bias);
 private:
   int               topologySize;
   vector<int>       topology;

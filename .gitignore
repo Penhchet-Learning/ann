@@ -27,3 +27,6 @@ config.json
 
 # ignore csv file
 *.csv
+
+*.out
+*.out.*

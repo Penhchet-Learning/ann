@@ -1,11 +1,17 @@
 #include "../../include/NeuralNetwork.hpp"
 
-void NeuralNetwork::train(vector<double> input, vector<double> target) {
+void NeuralNetwork::train(vector<double> input, vector<double> target, double bias) {
+  clock_t t;
   this->setCurrentInput(input);
   this->setCurrentTarget(target);
-  this->feedForward();
+  t = clock();
+  this->feedForward(bias);
+  t = clock() - t;
+  printf ("FF: %f seconds.\n",t,((float)t)/CLOCKS_PER_SEC);
   this->setErrors();
+  t = clock() - t;
   this->backPropagation();
+  printf ("BP: %f seconds.\n",t,((float)t)/CLOCKS_PER_SEC);
 }
 
 void NeuralNetwork::setLabelData(string filename) {
@@ -77,32 +83,6 @@ void NeuralNetwork::printOutputToConsole() {
     cout << outputValues->getValue(0, c) << "\t";
   }
   cout << endl;
-}
-
-void NeuralNetwork::setErrors() {
-  if(this->target.size() == 0) {
-    cerr << "No target for this neural network" << endl;
-    assert(false);
-  }
-
-  if(this->target.size() != this->layers.at(this->layers.size() - 1)->getNeurons().size()) {
-    cerr << "Target size is not the same as output layer size: " << this->layers.at(this->layers.size() - 1)->getNeurons().size() << endl;
-    assert(false);
-  }
-
-  this->error = 0.00;
-  int outputLayerIndex  = this->layers.size() - 1;
-  vector<Neuron *> outputNeurons  = this->layers.at(outputLayerIndex)->getNeurons();
-  for(int i = 0; i < target.size(); i++) {
-    double tempErr  = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
-    //double tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
-    errors.at(i) = tempErr;
-    this->error += pow(tempErr, 2);
-  }
-
-  this->error = 0.5 * this->error;
-
-  historicalErrors.push_back(this->error);
 }
 
 void NeuralNetwork::printToConsole() {

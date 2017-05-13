@@ -1,0 +1,10 @@
+{
+  "topology": [4, 2, 3],
+  "trainingData": "/home/ralampay/workspace/openann/iris-training.csv",
+  "labelData": "/home/ralampay/workspace/openann/iris-label.csv",
+  "epochThreshold": 100,
+  "momentum": 0.999,
+  "learningRate": 0.1,
+  "aveHistErrorFile": "/home/ralampay/workspace/openann/results.csv",
+  "bias": 0.02
+}
