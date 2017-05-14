@@ -52,6 +52,7 @@ public:
   void printHistoricalErrors();
 
   void saveWeights(string filename);  // Saves weights as a json file
+  void loadWeights(string filename);  // Load weights from a json file
 
   void train(
     vector<double> input, 

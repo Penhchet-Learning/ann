@@ -258,6 +258,33 @@ src/NeuralNetwork/feedForward.cpp.s:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.s
 .PHONY : src/NeuralNetwork/feedForward.cpp.s
 
+src/NeuralNetwork/loadWeights.o: src/NeuralNetwork/loadWeights.cpp.o
+
+.PHONY : src/NeuralNetwork/loadWeights.o
+
+# target to build an object file
+src/NeuralNetwork/loadWeights.cpp.o:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/loadWeights.cpp.o
+.PHONY : src/NeuralNetwork/loadWeights.cpp.o
+
+src/NeuralNetwork/loadWeights.i: src/NeuralNetwork/loadWeights.cpp.i
+
+.PHONY : src/NeuralNetwork/loadWeights.i
+
+# target to preprocess a source file
+src/NeuralNetwork/loadWeights.cpp.i:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/loadWeights.cpp.i
+.PHONY : src/NeuralNetwork/loadWeights.cpp.i
+
+src/NeuralNetwork/loadWeights.s: src/NeuralNetwork/loadWeights.cpp.s
+
+.PHONY : src/NeuralNetwork/loadWeights.s
+
+# target to generate assembly for a file
+src/NeuralNetwork/loadWeights.cpp.s:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/loadWeights.cpp.s
+.PHONY : src/NeuralNetwork/loadWeights.cpp.s
+
 src/NeuralNetwork/saveWeights.o: src/NeuralNetwork/saveWeights.cpp.o
 
 .PHONY : src/NeuralNetwork/saveWeights.o
@@ -471,6 +498,9 @@ help:
 	@echo "... src/NeuralNetwork/feedForward.o"
 	@echo "... src/NeuralNetwork/feedForward.i"
 	@echo "... src/NeuralNetwork/feedForward.s"
+	@echo "... src/NeuralNetwork/loadWeights.o"
+	@echo "... src/NeuralNetwork/loadWeights.i"
+	@echo "... src/NeuralNetwork/loadWeights.s"
 	@echo "... src/NeuralNetwork/saveWeights.o"
 	@echo "... src/NeuralNetwork/saveWeights.i"
 	@echo "... src/NeuralNetwork/saveWeights.s"

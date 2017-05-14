@@ -32,9 +32,16 @@ int main(int argc, char **argv) {
   double bias           = configJson["bias"];
   string mode           = configJson["mode"];
   string outputWeights  = configJson["outputWeights"];
+  string weights        = configJson["weights"];
 
   cout << "Initializing neural network..." << endl;
   NeuralNetwork *nn = new NeuralNetwork(topology, mode);
+
+  // initialize weights if weights file is specified
+  if(weights.compare("") != 0) {
+    nn->loadWeights(weights);
+  }
+
   cout << "Done initializing neural network..." << endl;
 
   cout << "Starting training..." << endl;

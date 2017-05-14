@@ -17,6 +17,7 @@ add_executable(
   src/NeuralNetwork/setErrors.cpp
   src/NeuralNetwork/train.cpp
   src/NeuralNetwork/saveWeights.cpp
+  src/NeuralNetwork/loadWeights.cpp
   src/utils/MultiplyMatrix.cpp
   src/utils/FetchCSVData.cpp
 )
