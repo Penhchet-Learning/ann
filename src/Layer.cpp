@@ -38,6 +38,15 @@ Layer::Layer(int size) {
   }
 }
 
+Layer::Layer(int size, int activationType) {
+  this->size  = size;
+
+  for(int i = 0; i < size; i++) {
+    Neuron *n = new Neuron(0.0000000000, activationType);
+    this->neurons.push_back(n);
+  }
+}
+
 void Layer::setVal(int i, double v) {
   this->neurons.at(i)->setVal(v);
 }

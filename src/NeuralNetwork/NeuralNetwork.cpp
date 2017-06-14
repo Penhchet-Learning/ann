@@ -125,8 +125,13 @@ NeuralNetwork::NeuralNetwork(
   }
 
   for(int i = 0; i < topologySize; i++) {
-    Layer *l  = new Layer(topology.at(i));
-    this->layers.push_back(l);
+    if(i > 0 && i < (topologySize - 1)) {
+      Layer *l  = new Layer(topology.at(i), RELU);
+      this->layers.push_back(l);
+    } else {
+      Layer *l  = new Layer(topology.at(i));
+      this->layers.push_back(l);
+    }
   }
 
   for(int i = 0; i < (topologySize - 1); i++) {

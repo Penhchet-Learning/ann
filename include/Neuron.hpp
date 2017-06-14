@@ -1,6 +1,9 @@
 #ifndef _NEURON_HPP_
 #define _NEURON_HPP_
 
+#define TANH 1
+#define RELU 2
+
 #include <iostream>
 #include <math.h>
 using namespace std;
@@ -10,6 +13,7 @@ class Neuron
 public:
 
   Neuron(double val);
+  Neuron(double val, int activationType);
 
   void setVal(double v);
 
@@ -32,6 +36,8 @@ private:
   double activatedVal;
 
   double derivedVal;
+
+  int activationType = 1;
 };
 
 #endif
