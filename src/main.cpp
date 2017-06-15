@@ -33,9 +33,25 @@ int main(int argc, char **argv) {
   string mode           = configJson["mode"];
   string outputWeights  = configJson["outputWeights"];
   string weights        = configJson["weights"];
+  string validationData = configJson["validationData"];
+  string validationLabels = configJson["validationLabels"];
+
+  int hiddenActivationType  = configJson["hiddenActivationType"];
+  int outputActivationType  = configJson["outputActivationType"];
+  int costFunctionType      = configJson["costFunctionType"];
 
   cout << "Initializing neural network..." << endl;
-  NeuralNetwork *nn = new NeuralNetwork(topology, mode);
+  cout << "HIDDEN ACTIVATION: " << hiddenActivationType << endl;
+  cout << "OUTPUT ACTIVATION: " << outputActivationType << endl;
+  cout << "COST FUNCTION: " << costFunctionType << endl;
+
+  NeuralNetwork *nn = new NeuralNetwork(
+                        topology,
+                        mode,
+                        hiddenActivationType,
+                        outputActivationType,
+                        costFunctionType
+                      );
 
   // initialize weights if weights file is specified
   if(weights.compare("") != 0) {
@@ -71,6 +87,19 @@ int main(int argc, char **argv) {
   }
 
   nn->saveWeights(outputWeights);
+
+  // validation
+  /*
+  vector<vector<double> > data  = (new utils::FetchCSVData(validationData))->execute();
+  vector<vector<double> > labels = (new utils::FetchCSVData(validationLabels))->execute();
+  for(int i = 0; i < data.size(); i++) {
+    nn->setCurrentInput(data.at(i));
+    nn->setCurrentTarget(labels.at(i));
+    nn->feedForward();
+    nn->printToConsole();
+    cout << endl;
+  }
+  */
 
   return 0;
 }

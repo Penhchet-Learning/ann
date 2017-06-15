@@ -18,13 +18,22 @@ void NeuralNetwork::setErrors() {
   int outputLayerIndex  = this->layers.size() - 1;
   vector<Neuron *> outputNeurons  = this->layers.at(outputLayerIndex)->getNeurons();
   for(int i = 0; i < target.size(); i++) {
-    double tempErr  = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
-    //double tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
+    double tempErr  = 0;
+
+    if(this->costFunctionType == COST_SIMPLE) {
+      tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
+    } else if(this->costFunctionType == COST_RELU) {
+      tempErr = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
+    } else {
+      // default to COST_SIMPLE
+      tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
+    }
+
     errors.at(i) = tempErr;
-    this->error += pow(tempErr, 2);
+    this->error += errors.at(i);
   }
 
-  this->error = 0.5 * this->error;
+  this->error = this->error;
 
   historicalErrors.push_back(this->error);
 }

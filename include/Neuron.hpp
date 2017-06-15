@@ -3,6 +3,7 @@
 
 #define TANH 1
 #define RELU 2
+#define SIGM 3
 
 #include <iostream>
 #include <math.h>
@@ -18,10 +19,8 @@ public:
   void setVal(double v);
 
   void activate();
-  void activateFastSigmoid();
 
   void derive();
-  void deriveFastSigmoid();
 
   // Getter
   double getVal() { return this->val; }

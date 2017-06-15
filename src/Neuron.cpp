@@ -20,10 +20,7 @@ Neuron::Neuron(double val, int activationType) {
   derive();
 }
 
-// Fast Sigmoid Function
-// f(x) = x / (1 + |x|)
 void Neuron::activate() {
-  //this->activatedVal = this->val / (1 + abs(this->val));
   if(activationType == TANH) {
     this->activatedVal = tanh(this->val);
   } else if(activationType == RELU) {
@@ -32,15 +29,14 @@ void Neuron::activate() {
     } else {
       this->activatedVal = 0;
     }
+  } else if(activationType == SIGM) {
+    this->activatedVal  = (1 / (1 + exp(-this->val)));
   } else {
     this->activatedVal = tanh(this->val);
   }
 }
 
-// Derivative for fast sigmoid function
-// f'(x) = f(x) * (1 - f(x))
 void Neuron::derive() {
-  //this->derivedVal = this->activatedVal * (1 - this->activatedVal);
   if(activationType == TANH) {
     this->derivedVal = (1.0 - (this->activatedVal * this->activatedVal));
   } else if(activationType == RELU) {
@@ -49,6 +45,8 @@ void Neuron::derive() {
     } else {
       this->activatedVal = 0;
     }
+  } else if(activationType == SIGM) {
+    this->derivedVal = (this->activatedVal * (1 - this->activatedVal));
   } else {
     this->derivedVal = (1.0 - (this->activatedVal * this->activatedVal));
   }

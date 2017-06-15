@@ -98,7 +98,7 @@ void NeuralNetwork::setCurrentInput(vector<double> input) {
   }
 }
 
-// Constructor
+// Constructor 1
 NeuralNetwork::NeuralNetwork(
   vector<int> topology, 
   string mode,
@@ -126,7 +126,70 @@ NeuralNetwork::NeuralNetwork(
 
   for(int i = 0; i < topologySize; i++) {
     if(i > 0 && i < (topologySize - 1)) {
-      Layer *l  = new Layer(topology.at(i), RELU);
+      Layer *l  = new Layer(topology.at(i), this->hiddenActivationType);
+      this->layers.push_back(l);
+    } else if(i == (topologySize - 1)) {
+      Layer *l  = new Layer(topology.at(i), this->outputActivationType);
+      this->layers.push_back(l);
+    } else {
+      Layer *l  = new Layer(topology.at(i));
+      this->layers.push_back(l);
+    }
+  }
+
+  for(int i = 0; i < (topologySize - 1); i++) {
+    Matrix *m = new Matrix(topology.at(i), topology.at(i + 1), true);
+
+    this->weightMatrices.push_back(m);
+  }
+
+  // Initialize empty errors
+  for(int i = 0; i < topology.at(topology.size() - 1); i++) {
+    errors.push_back(0.00);
+  }
+
+  this->error = 0.00;
+}
+
+// Constructor 1
+NeuralNetwork::NeuralNetwork(
+  vector<int> topology, 
+  string mode,
+  int hiddenActivationType,
+  int outputActivationType,
+  int costFunctionType,
+  double bias,
+  double learningRate, 
+  double momentum
+) {
+  this->topology      = topology;
+  this->topologySize  = topology.size();
+  this->learningRate  = learningRate;
+  this->momentum      = momentum;
+  this->bias          = bias;
+
+  this->hiddenActivationType  = hiddenActivationType;
+  this->outputActivationType  = outputActivationType;
+  this->costFunctionType      = costFunctionType;
+
+  // Check for autoencoder mode
+  if(mode.compare("autoencoder") == 0) {
+    if(this->topology.size() % 2 == 0) {
+      cerr << "Invalid topology. Should be odd number in size" << endl;
+      exit(-1);
+    }
+  //} else if(mode.compare("classifier") == 0) {
+  } else {
+    cerr << "Invalid mode " << mode << endl;
+    exit(-1);
+  }
+
+  for(int i = 0; i < topologySize; i++) {
+    if(i > 0 && i < (topologySize - 1)) {
+      Layer *l  = new Layer(topology.at(i), this->hiddenActivationType);
+      this->layers.push_back(l);
+    } else if(i == (topologySize - 1)) {
+      Layer *l  = new Layer(topology.at(i), this->outputActivationType);
       this->layers.push_back(l);
     } else {
       Layer *l  = new Layer(topology.at(i));

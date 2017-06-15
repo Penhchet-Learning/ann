@@ -1,6 +1,9 @@
 #ifndef _NEURAL_NETWORK_HPP_
 #define _NEURAL_NETWORK_HPP_
 
+#define COST_SIMPLE 1
+#define COST_RELU 2
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -22,6 +25,17 @@ public:
   NeuralNetwork(
     vector<int> topology, 
     string mode,
+    double bias = 1,
+    double learningRate = 0.05, 
+    double momentum = 1
+  );
+
+  NeuralNetwork(
+    vector<int> topology, 
+    string mode,
+    int hiddenActivationType,
+    int outputActivationType,
+    int costFunctionType,
     double bias = 1,
     double learningRate = 0.05, 
     double momentum = 1
@@ -63,6 +77,9 @@ public:
   );
 private:
   int               topologySize;
+  int               hiddenActivationType  = 2; // relu for hidden by default
+  int               outputActivationType  = 3; // sigmoid for output by default
+  int               costFunctionType      = 1; // simple cost function (target - guess)
   vector<int>       topology;
   vector<Layer *>   layers;
   vector<Matrix *>  weightMatrices;
