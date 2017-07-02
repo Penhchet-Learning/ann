@@ -1,6 +1,8 @@
-#include "../../include/utils/FetchCSVData.hpp"
+#include "../../include/utils/Misc.hpp"
 
-utils::FetchCSVData::FetchCSVData(string filename) {
+vector<vector<double> > utils::Misc::fetchCSVData(string filename) {
+  vector<vector<double> > data;
+
   ifstream infile(filename);
 
   string line;
@@ -15,8 +17,6 @@ utils::FetchCSVData::FetchCSVData(string filename) {
 
     data.push_back(dRow);
   }
-}
 
-vector<vector<double> > utils::FetchCSVData::execute() {
-  return this->data;
+  return data;
 }

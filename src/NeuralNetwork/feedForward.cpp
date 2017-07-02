@@ -1,21 +1,25 @@
 #include "../../include/NeuralNetwork.hpp"
+#include "../../include/utils/Math.hpp"
 
 void NeuralNetwork::feedForward() {
   Matrix *a;
   Matrix *b;
   Matrix *c;
-  MultiplyMatrix *multiplier;
 
   for(int i = 0; i < (this->layers.size() - 1); i++) {
     a = this->getNeuronMatrix(i);
+    b = this->getWeightMatrix(i);
+    c = new Matrix(
+          a->getNumRows(), 
+          b->getNumCols(), 
+          false
+        );
 
     if(i != 0) {
       a = this->getActivatedNeuronMatrix(i);
     }
 
-    b           = this->getWeightMatrix(i);
-    multiplier  = new MultiplyMatrix(a, b);
-    c           = multiplier->execute();
+    utils::Math::multiplyMatrix(a, b, c);
 
     for(int c_index = 0; c_index < c->getNumCols(); c_index++) {
       if(i == (this->layers.size() - 2)) {

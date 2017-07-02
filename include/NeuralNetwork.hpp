@@ -10,13 +10,11 @@
 #include <vector>
 #include <algorithm>
 #include <time.h>
-#include "utils/MultiplyMatrix.hpp"
 #include "Matrix.hpp"
 #include "Layer.hpp"
 #include "../include/json.hpp"
 
 using namespace std;
-using namespace utils;
 using json = nlohmann::json;
 
 class NeuralNetwork
@@ -44,6 +42,7 @@ public:
   void setCurrentInput(vector<double> input);
   void setCurrentTarget(vector<double> target) { this->target = target; };
   void feedForward();
+  void feedForward2();
   void backPropagation();
   void printToConsole();
   void setErrors();

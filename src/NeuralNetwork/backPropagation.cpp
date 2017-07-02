@@ -1,4 +1,5 @@
 #include "../../include/NeuralNetwork.hpp"
+#include "../../include/utils/Math.hpp"
 
 void NeuralNetwork::backPropagation() {
   // Output to Hidden
@@ -23,8 +24,6 @@ void NeuralNetwork::backPropagation() {
   Matrix *t3;
   Matrix *t4;
 
-  MultiplyMatrix *multiplier;
-
 
   // output to hidden
   int outputLayerIndex  = this->layers.size() - 1;
@@ -43,16 +42,20 @@ void NeuralNetwork::backPropagation() {
   }
 
   int lastHiddenLayerIndex  = outputLayerIndex - 1;
-  t1          = gradientsYToZ->transpose();
-  t2          = this->layers.at(lastHiddenLayerIndex)->matrixifyActivatedVals();
-  multiplier  = new MultiplyMatrix(t1, t2);
-  t3          = multiplier->execute();
+  t1  = gradientsYToZ->transpose();
+  t2  = this->layers.at(lastHiddenLayerIndex)->matrixifyActivatedVals();
+  t3  = new Matrix(
+          t1->getNumRows(),
+          t2->getNumCols(),
+          false
+        );
+
+  utils::Math::multiplyMatrix(t1, t2, t3);
 
   deltaOutputToHidden = t3->transpose();
 
   delete t1;
   delete t2;
-  delete multiplier;
   delete t3;
 
   int tempR = deltaOutputToHidden->getNumRows();
@@ -111,13 +114,18 @@ void NeuralNetwork::backPropagation() {
     }
 
     leftNeurons = (i - 1) == 0 ? this->layers.at(0)->matrixifyVals() : this->layers.at(i - 1)->matrixifyActivatedVals();
+    t1          = derivedGradients->transpose();
+    t2          = new Matrix(
+                    leftNeurons->getNumRows(),
+                    t1->getNumCols(),
+                    false
+                  );
 
-    t1            = derivedGradients->transpose();
-    multiplier    = new MultiplyMatrix(t1, leftNeurons);
-    t2            = multiplier->execute();
+    utils::Math::multiplyMatrix(leftNeurons, t1, t2);
+
     deltaWeights  = t2->transpose();
+
     delete t1;
-    delete multiplier;
     delete t2;
 
     int tempR = deltaWeights->getNumRows();
@@ -159,6 +167,7 @@ void NeuralNetwork::backPropagation() {
     }
 
     newWeights.push_back(new Matrix(*newWeightsHidden));
+
     delete deltaWeights;
     delete leftNeurons;
   }
@@ -169,6 +178,7 @@ void NeuralNetwork::backPropagation() {
   for(int i = 0; i < this->weightMatrices.size(); i++) {
     delete this->weightMatrices[i];
   }
+
   this->weightMatrices.clear();
   
   // create copies of newWeights
@@ -179,6 +189,7 @@ void NeuralNetwork::backPropagation() {
 
   newWeights.clear();
 
+  // cleanup
   delete derivedValuesYToZ;
   delete gradientsYToZ;
   delete gradient;

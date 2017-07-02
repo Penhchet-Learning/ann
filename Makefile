@@ -420,59 +420,59 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/utils/FetchCSVData.o: src/utils/FetchCSVData.cpp.o
+src/utils/Math.o: src/utils/Math.cpp.o
 
-.PHONY : src/utils/FetchCSVData.o
-
-# target to build an object file
-src/utils/FetchCSVData.cpp.o:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/FetchCSVData.cpp.o
-.PHONY : src/utils/FetchCSVData.cpp.o
-
-src/utils/FetchCSVData.i: src/utils/FetchCSVData.cpp.i
-
-.PHONY : src/utils/FetchCSVData.i
-
-# target to preprocess a source file
-src/utils/FetchCSVData.cpp.i:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/FetchCSVData.cpp.i
-.PHONY : src/utils/FetchCSVData.cpp.i
-
-src/utils/FetchCSVData.s: src/utils/FetchCSVData.cpp.s
-
-.PHONY : src/utils/FetchCSVData.s
-
-# target to generate assembly for a file
-src/utils/FetchCSVData.cpp.s:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/FetchCSVData.cpp.s
-.PHONY : src/utils/FetchCSVData.cpp.s
-
-src/utils/MultiplyMatrix.o: src/utils/MultiplyMatrix.cpp.o
-
-.PHONY : src/utils/MultiplyMatrix.o
+.PHONY : src/utils/Math.o
 
 # target to build an object file
-src/utils/MultiplyMatrix.cpp.o:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/MultiplyMatrix.cpp.o
-.PHONY : src/utils/MultiplyMatrix.cpp.o
+src/utils/Math.cpp.o:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Math.cpp.o
+.PHONY : src/utils/Math.cpp.o
 
-src/utils/MultiplyMatrix.i: src/utils/MultiplyMatrix.cpp.i
+src/utils/Math.i: src/utils/Math.cpp.i
 
-.PHONY : src/utils/MultiplyMatrix.i
+.PHONY : src/utils/Math.i
 
 # target to preprocess a source file
-src/utils/MultiplyMatrix.cpp.i:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/MultiplyMatrix.cpp.i
-.PHONY : src/utils/MultiplyMatrix.cpp.i
+src/utils/Math.cpp.i:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Math.cpp.i
+.PHONY : src/utils/Math.cpp.i
 
-src/utils/MultiplyMatrix.s: src/utils/MultiplyMatrix.cpp.s
+src/utils/Math.s: src/utils/Math.cpp.s
 
-.PHONY : src/utils/MultiplyMatrix.s
+.PHONY : src/utils/Math.s
 
 # target to generate assembly for a file
-src/utils/MultiplyMatrix.cpp.s:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/MultiplyMatrix.cpp.s
-.PHONY : src/utils/MultiplyMatrix.cpp.s
+src/utils/Math.cpp.s:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Math.cpp.s
+.PHONY : src/utils/Math.cpp.s
+
+src/utils/Misc.o: src/utils/Misc.cpp.o
+
+.PHONY : src/utils/Misc.o
+
+# target to build an object file
+src/utils/Misc.cpp.o:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Misc.cpp.o
+.PHONY : src/utils/Misc.cpp.o
+
+src/utils/Misc.i: src/utils/Misc.cpp.i
+
+.PHONY : src/utils/Misc.i
+
+# target to preprocess a source file
+src/utils/Misc.cpp.i:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Misc.cpp.i
+.PHONY : src/utils/Misc.cpp.i
+
+src/utils/Misc.s: src/utils/Misc.cpp.s
+
+.PHONY : src/utils/Misc.s
+
+# target to generate assembly for a file
+src/utils/Misc.cpp.s:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Misc.cpp.s
+.PHONY : src/utils/Misc.cpp.s
 
 # Help Target
 help:
@@ -516,12 +516,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/utils/FetchCSVData.o"
-	@echo "... src/utils/FetchCSVData.i"
-	@echo "... src/utils/FetchCSVData.s"
-	@echo "... src/utils/MultiplyMatrix.o"
-	@echo "... src/utils/MultiplyMatrix.i"
-	@echo "... src/utils/MultiplyMatrix.s"
+	@echo "... src/utils/Math.o"
+	@echo "... src/utils/Math.i"
+	@echo "... src/utils/Math.s"
+	@echo "... src/utils/Misc.o"
+	@echo "... src/utils/Misc.i"
+	@echo "... src/utils/Misc.s"
 .PHONY : help
 
 

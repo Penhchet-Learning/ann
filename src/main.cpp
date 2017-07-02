@@ -10,8 +10,7 @@
 #include "../include/Neuron.hpp"
 #include "../include/Matrix.hpp"
 #include "../include/NeuralNetwork.hpp"
-#include "../include/utils/MultiplyMatrix.hpp"
-#include "../include/utils/FetchCSVData.hpp"
+#include "../include/utils/Misc.hpp"
 
 using namespace std;
 using json = nlohmann::json;
@@ -68,8 +67,8 @@ int main(int argc, char **argv) {
   while(epoch <= epochThreshold) {
     double aveError = 0;
 
-    vector<vector<double> > data  = (new utils::FetchCSVData(trainingData))->execute();
-    vector<vector<double> > labels = (new utils::FetchCSVData(labelData))->execute();
+    vector<vector<double> > data    = utils::Misc::fetchCSVData(trainingData);
+    vector<vector<double> > labels  = utils::Misc::fetchCSVData(labelData);
     t = clock();
     for(int i = 0; i < data.size(); i++) {
       nn->train(data.at(i), labels.at(i), bias, learningRate, momentum);
@@ -83,23 +82,10 @@ int main(int argc, char **argv) {
     t = clock() - t;
     //printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
 
+    // save weights at every iteration
+    nn->saveWeights(outputWeights);
     epoch++;
   }
-
-  nn->saveWeights(outputWeights);
-
-  // validation
-  /*
-  vector<vector<double> > data  = (new utils::FetchCSVData(validationData))->execute();
-  vector<vector<double> > labels = (new utils::FetchCSVData(validationLabels))->execute();
-  for(int i = 0; i < data.size(); i++) {
-    nn->setCurrentInput(data.at(i));
-    nn->setCurrentTarget(labels.at(i));
-    nn->feedForward();
-    nn->printToConsole();
-    cout << endl;
-  }
-  */
 
   return 0;
 }
