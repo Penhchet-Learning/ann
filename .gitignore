@@ -12,6 +12,8 @@ logs/
 
 # ignore binaries
 openann
+split
+edge-detector
 
 # ignore config file to allow developers to include their own config for testing
 config.yaml
