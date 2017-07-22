@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/ralampay/workspace/ann
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -122,6 +122,32 @@ openann: cmake_check_build_system
 openann/fast:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/build
 .PHONY : openann/fast
+
+#=============================================================================
+# Target rules for targets named split
+
+# Build rule for target.
+split: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 split
+.PHONY : split
+
+# fast build rule for target.
+split/fast:
+	$(MAKE) -f CMakeFiles/split.dir/build.make CMakeFiles/split.dir/build
+.PHONY : split/fast
+
+#=============================================================================
+# Target rules for targets named edge-detector
+
+# Build rule for target.
+edge-detector: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 edge-detector
+.PHONY : edge-detector
+
+# fast build rule for target.
+edge-detector/fast:
+	$(MAKE) -f CMakeFiles/edge-detector.dir/build.make CMakeFiles/edge-detector.dir/build
+.PHONY : edge-detector/fast
 
 src/Layer.o: src/Layer.cpp.o
 
@@ -393,6 +419,33 @@ src/Neuron.cpp.s:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Neuron.cpp.s
 .PHONY : src/Neuron.cpp.s
 
+src/edge-detector.o: src/edge-detector.cpp.o
+
+.PHONY : src/edge-detector.o
+
+# target to build an object file
+src/edge-detector.cpp.o:
+	$(MAKE) -f CMakeFiles/edge-detector.dir/build.make CMakeFiles/edge-detector.dir/src/edge-detector.cpp.o
+.PHONY : src/edge-detector.cpp.o
+
+src/edge-detector.i: src/edge-detector.cpp.i
+
+.PHONY : src/edge-detector.i
+
+# target to preprocess a source file
+src/edge-detector.cpp.i:
+	$(MAKE) -f CMakeFiles/edge-detector.dir/build.make CMakeFiles/edge-detector.dir/src/edge-detector.cpp.i
+.PHONY : src/edge-detector.cpp.i
+
+src/edge-detector.s: src/edge-detector.cpp.s
+
+.PHONY : src/edge-detector.s
+
+# target to generate assembly for a file
+src/edge-detector.cpp.s:
+	$(MAKE) -f CMakeFiles/edge-detector.dir/build.make CMakeFiles/edge-detector.dir/src/edge-detector.cpp.s
+.PHONY : src/edge-detector.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -419,6 +472,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/split.o: src/split.cpp.o
+
+.PHONY : src/split.o
+
+# target to build an object file
+src/split.cpp.o:
+	$(MAKE) -f CMakeFiles/split.dir/build.make CMakeFiles/split.dir/src/split.cpp.o
+.PHONY : src/split.cpp.o
+
+src/split.i: src/split.cpp.i
+
+.PHONY : src/split.i
+
+# target to preprocess a source file
+src/split.cpp.i:
+	$(MAKE) -f CMakeFiles/split.dir/build.make CMakeFiles/split.dir/src/split.cpp.i
+.PHONY : src/split.cpp.i
+
+src/split.s: src/split.cpp.s
+
+.PHONY : src/split.s
+
+# target to generate assembly for a file
+src/split.cpp.s:
+	$(MAKE) -f CMakeFiles/split.dir/build.make CMakeFiles/split.dir/src/split.cpp.s
+.PHONY : src/split.cpp.s
 
 src/utils/Math.o: src/utils/Math.cpp.o
 
@@ -480,9 +560,11 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... openann"
+	@echo "... split"
+	@echo "... edge-detector"
+	@echo "... edit_cache"
 	@echo "... src/Layer.o"
 	@echo "... src/Layer.i"
 	@echo "... src/Layer.s"
@@ -513,9 +595,15 @@ help:
 	@echo "... src/Neuron.o"
 	@echo "... src/Neuron.i"
 	@echo "... src/Neuron.s"
+	@echo "... src/edge-detector.o"
+	@echo "... src/edge-detector.i"
+	@echo "... src/edge-detector.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/split.o"
+	@echo "... src/split.i"
+	@echo "... src/split.s"
 	@echo "... src/utils/Math.o"
 	@echo "... src/utils/Math.i"
 	@echo "... src/utils/Math.s"

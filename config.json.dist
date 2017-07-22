@@ -1,5 +1,18 @@
 {
-  "topology": [4, 2, 4],
-  "trainingData": "/home/ralampay/workspace/openann/trainingData.csv",
-  "labelData": "/home/ralampay/workspace/openann/labelData.csv"
+  "topology": [4000, 10, 4000],
+  "trainingData": "/home/ralampay/workspace/ann/cars.csv",
+  "labelData": "/home/ralampay/workspace/ann/cars.csv",
+  "validationData": "/home/ralampay/workspace/ann/xor.csv",
+  "validationLabels": "/home/ralampay/workspace/ann/xor_labels.csv",
+  "epochThreshold": 100000000,
+  "errorThreshold": 0.1,
+  "momentum": 1,
+  "learningRate": 0.001,
+  "bias": 1,
+  "mode": "autoencoder",
+  "hiddenActivationType": 1,
+  "outputActivationType": 1,
+  "costFunctionType": 2,
+  "outputWeights": "outputWeights.json",
+  "weights": ""
 }

@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 
   vector<int> topology  = configJson["topology"];
   int epochThreshold    = configJson["epochThreshold"];
+  double errorThreshold = configJson["errorThreshold"];
   string trainingData   = configJson["trainingData"];
   string labelData      = configJson["labelData"];
   double momentum       = configJson["momentum"];
@@ -63,9 +64,9 @@ int main(int argc, char **argv) {
   int epoch = 1;
 
   vector<double> histAveError;
+  double aveError = 999;
   clock_t t;
   while(epoch <= epochThreshold) {
-    double aveError = 0;
 
     vector<vector<double> > data    = utils::Misc::fetchCSVData(trainingData);
     vector<vector<double> > labels  = utils::Misc::fetchCSVData(labelData);
@@ -79,11 +80,18 @@ int main(int argc, char **argv) {
 
     histAveError.push_back(aveError);
     cout << aveError << endl;
+
     t = clock() - t;
     //printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
 
     // save weights at every iteration
     nn->saveWeights(outputWeights);
+
+    if(aveError < errorThreshold) {
+      cout << "Error below threshold" << endl;
+      break;
+    }
+
     epoch++;
   }
 
