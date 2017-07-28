@@ -29,10 +29,12 @@ add_executable(
   src/split.cpp
 )
 
+target_link_libraries( split ${OpenCV_LIBS} )
+
 # Edge Detector
 add_executable(
   edge-detector
   src/edge-detector.cpp
 )
 
-target_link_libraries( split ${OpenCV_LIBS} )
+target_link_libraries( edge-detector ${OpenCV_LIBS} )
