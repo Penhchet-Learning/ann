@@ -78,6 +78,8 @@ void cannyThreshold(int, void*) {
     rectangle( drawing, tl, br, squareLineColor, 1, 8, 0 );
   }
 
+  cout << contours.size() << " objects found." << endl;
+
   imshow("Display", drawing);
 }
 
