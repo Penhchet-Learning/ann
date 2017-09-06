@@ -14,6 +14,7 @@ public:
   Matrix(int numRows, int numCols, bool isRandom);
 
   Matrix *transpose();
+  Matrix *copy();
   double generateRandomNumber();
 
   void setValue(int r, int c, double v) { this->values.at(r).at(c) = v; }

@@ -1,5 +1,17 @@
 #include "../include/Matrix.hpp"
 
+Matrix *Matrix::copy() {
+  Matrix *m = new Matrix(this->numRows, this->numCols, false);
+
+  for(int i = 0; i < numRows; i++) {
+    for(int j = 0; j < numCols; j++) {
+      m->setValue(i, j, this->getValue(i, j));
+    }
+  }
+
+  return m;
+}
+
 Matrix *Matrix::transpose() {
   Matrix *m = new Matrix(this->numCols, this->numRows, false);
 

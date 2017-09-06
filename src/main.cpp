@@ -22,19 +22,19 @@ int main(int argc, char **argv) {
 
   auto configJson = json::parse(str);
 
-  vector<int> topology  = configJson["topology"];
-  int epochThreshold    = configJson["epochThreshold"];
-  double errorThreshold = configJson["errorThreshold"];
-  string trainingData   = configJson["trainingData"];
-  string labelData      = configJson["labelData"];
-  double momentum       = configJson["momentum"];
-  double learningRate   = configJson["learningRate"];
-  double bias           = configJson["bias"];
-  string mode           = configJson["mode"];
-  string outputWeights  = configJson["outputWeights"];
-  string weights        = configJson["weights"];
-  string validationData = configJson["validationData"];
-  string validationLabels = configJson["validationLabels"];
+  vector<int> topology      = configJson["topology"];
+  int epochThreshold        = configJson["epochThreshold"];
+  double errorThreshold     = configJson["errorThreshold"];
+  string trainingData       = configJson["trainingData"];
+  string labelData          = configJson["labelData"];
+  double momentum           = configJson["momentum"];
+  double learningRate       = configJson["learningRate"];
+  double bias               = configJson["bias"];
+  string mode               = configJson["mode"];
+  string outputWeights      = configJson["outputWeights"];
+  string weights            = configJson["weights"];
+  string validationData     = configJson["validationData"];
+  string validationLabels   = configJson["validationLabels"];
 
   int hiddenActivationType  = configJson["hiddenActivationType"];
   int outputActivationType  = configJson["outputActivationType"];
@@ -66,10 +66,13 @@ int main(int argc, char **argv) {
   vector<double> histAveError;
   double aveError = 999;
   clock_t t;
-  while(epoch <= epochThreshold) {
 
-    vector<vector<double> > data    = utils::Misc::fetchCSVData(trainingData);
-    vector<vector<double> > labels  = utils::Misc::fetchCSVData(labelData);
+  vector<vector<double> > data    = utils::Misc::fetchCSVData(trainingData);
+  vector<vector<double> > labels  = utils::Misc::fetchCSVData(labelData);
+
+  cout << "Data size: " << data.size() << " Label size: " << labels.size() << endl;
+
+  while(epoch <= epochThreshold) {
     t = clock();
     for(int i = 0; i < data.size(); i++) {
       nn->train(data.at(i), labels.at(i), bias, learningRate, momentum);
@@ -85,6 +88,8 @@ int main(int argc, char **argv) {
     //printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
 
     // save weights at every iteration
+    //nn->printToConsole();
+    //cout << endl;
     nn->saveWeights(outputWeights);
 
     if(aveError < errorThreshold) {
