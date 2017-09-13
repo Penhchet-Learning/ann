@@ -47,6 +47,8 @@ public:
   void printToConsole();
   void setErrors();
 
+  vector<double> getActivatedVals(int index) { return this->layers.at(index)->getActivatedVals(); }
+
   Matrix *getNeuronMatrix(int index) { return this->layers.at(index)->matrixifyVals(); };
   Matrix *getActivatedNeuronMatrix(int index) { return this->layers.at(index)->matrixifyActivatedVals(); };
   Matrix *getDerivedNeuronMatrix(int index) { return this->layers.at(index)->matrixifyDerivedVals(); };
@@ -74,7 +76,7 @@ public:
     double learningRate = 0.05, 
     double momentum = 1
   );
-private:
+//private:
   int               topologySize;
   int               hiddenActivationType  = 2; // relu for hidden by default
   int               outputActivationType  = 3; // sigmoid for output by default

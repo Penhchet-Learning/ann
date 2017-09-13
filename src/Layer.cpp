@@ -1,5 +1,16 @@
 #include "../include/Layer.hpp"
 
+vector<double> Layer::getActivatedVals() {
+  vector<double> ret;
+
+  for(int i = 0; i < this->neurons.size(); i++) {
+    double  v = this->neurons.at(i)->getActivatedVal();
+    ret.push_back(v);
+  }
+
+  return ret;
+}
+
 Matrix *Layer::matrixifyVals() {
   Matrix *m = new Matrix(1, this->neurons.size(), false);
 

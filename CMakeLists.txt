@@ -21,3 +21,20 @@ add_executable(
   src/utils/Math.cpp
   src/utils/Misc.cpp
 )
+
+add_executable(
+  autoencoder-extractor
+  src/autoencoder-extractor.cpp
+  src/Neuron.cpp
+  src/Matrix.cpp
+  src/Layer.cpp
+  src/NeuralNetwork/NeuralNetwork.cpp
+  src/NeuralNetwork/backPropagation.cpp
+  src/NeuralNetwork/feedForward.cpp
+  src/NeuralNetwork/setErrors.cpp
+  src/NeuralNetwork/train.cpp
+  src/NeuralNetwork/saveWeights.cpp
+  src/NeuralNetwork/loadWeights.cpp
+  src/utils/Math.cpp
+  src/utils/Misc.cpp
+)
