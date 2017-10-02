@@ -14,27 +14,22 @@ void NeuralNetwork::setErrors() {
     assert(false);
   }
 
-  this->error = 0.00;
-  int outputLayerIndex  = this->layers.size() - 1;
-  vector<Neuron *> outputNeurons  = this->layers.at(outputLayerIndex)->getNeurons();
-  for(int i = 0; i < target.size(); i++) {
-    double tempErr  = 0;
-
-    if(this->costFunctionType == COST_SIMPLE) {
-      tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
-    } else if(this->costFunctionType == COST_RELU) {
-      tempErr = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
-    } else {
-      // default to COST_SIMPLE
-      tempErr  = (target.at(i) - outputNeurons.at(i)->getActivatedVal());
-    }
-
-    errors.at(i) = tempErr;
-    this->error += errors.at(i);
+  switch(costFunctionType) {
+    case(COST_MSE): this->setErrorMSE(); break;
+    default: this->setErrorMSE(); break;
   }
-
-  this->error = this->error;
-
-  historicalErrors.push_back(this->error);
 }
 
+void NeuralNetwork::setErrorMSE() {
+  int outputLayerIndex  = this->layers.size() - 1;
+  vector<Neuron *> outputNeurons  = this->layers.at(outputLayerIndex)->getNeurons();
+
+  this->error = 0.00;
+
+  for(int i = 0; i < target.size(); i++) {
+    double t        = target.at(i);
+    double y        = outputNeurons.at(i)->getActivatedVal();
+    errors.at(i)    = 0.5 * pow(abs((t - y)), 2);
+    this->error     += errors.at(i);
+  }
+}

@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/ralampay/workspace/ann
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named openann
+
+# Build rule for target.
+openann: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 openann
+.PHONY : openann
+
+# fast build rule for target.
+openann/fast:
+	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/build
+.PHONY : openann/fast
+
+#=============================================================================
 # Target rules for targets named autoencoder-extractor
 
 # Build rule for target.
@@ -124,17 +137,17 @@ autoencoder-extractor/fast:
 .PHONY : autoencoder-extractor/fast
 
 #=============================================================================
-# Target rules for targets named openann
+# Target rules for targets named autoencoder-outlier-detector
 
 # Build rule for target.
-openann: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 openann
-.PHONY : openann
+autoencoder-outlier-detector: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 autoencoder-outlier-detector
+.PHONY : autoencoder-outlier-detector
 
 # fast build rule for target.
-openann/fast:
-	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/build
-.PHONY : openann/fast
+autoencoder-outlier-detector/fast:
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/build
+.PHONY : autoencoder-outlier-detector/fast
 
 src/Layer.o: src/Layer.cpp.o
 
@@ -142,8 +155,9 @@ src/Layer.o: src/Layer.cpp.o
 
 # target to build an object file
 src/Layer.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Layer.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Layer.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Layer.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Layer.cpp.o
 .PHONY : src/Layer.cpp.o
 
 src/Layer.i: src/Layer.cpp.i
@@ -152,8 +166,9 @@ src/Layer.i: src/Layer.cpp.i
 
 # target to preprocess a source file
 src/Layer.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Layer.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Layer.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Layer.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Layer.cpp.i
 .PHONY : src/Layer.cpp.i
 
 src/Layer.s: src/Layer.cpp.s
@@ -162,8 +177,9 @@ src/Layer.s: src/Layer.cpp.s
 
 # target to generate assembly for a file
 src/Layer.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Layer.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Layer.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Layer.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Layer.cpp.s
 .PHONY : src/Layer.cpp.s
 
 src/Matrix.o: src/Matrix.cpp.o
@@ -172,8 +188,9 @@ src/Matrix.o: src/Matrix.cpp.o
 
 # target to build an object file
 src/Matrix.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Matrix.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Matrix.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Matrix.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Matrix.cpp.o
 .PHONY : src/Matrix.cpp.o
 
 src/Matrix.i: src/Matrix.cpp.i
@@ -182,8 +199,9 @@ src/Matrix.i: src/Matrix.cpp.i
 
 # target to preprocess a source file
 src/Matrix.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Matrix.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Matrix.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Matrix.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Matrix.cpp.i
 .PHONY : src/Matrix.cpp.i
 
 src/Matrix.s: src/Matrix.cpp.s
@@ -192,8 +210,9 @@ src/Matrix.s: src/Matrix.cpp.s
 
 # target to generate assembly for a file
 src/Matrix.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Matrix.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Matrix.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Matrix.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Matrix.cpp.s
 .PHONY : src/Matrix.cpp.s
 
 src/NeuralNetwork/NeuralNetwork.o: src/NeuralNetwork/NeuralNetwork.cpp.o
@@ -202,8 +221,9 @@ src/NeuralNetwork/NeuralNetwork.o: src/NeuralNetwork/NeuralNetwork.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/NeuralNetwork.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/NeuralNetwork.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/NeuralNetwork.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/NeuralNetwork.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/NeuralNetwork.cpp.o
 .PHONY : src/NeuralNetwork/NeuralNetwork.cpp.o
 
 src/NeuralNetwork/NeuralNetwork.i: src/NeuralNetwork/NeuralNetwork.cpp.i
@@ -212,8 +232,9 @@ src/NeuralNetwork/NeuralNetwork.i: src/NeuralNetwork/NeuralNetwork.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/NeuralNetwork.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/NeuralNetwork.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/NeuralNetwork.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/NeuralNetwork.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/NeuralNetwork.cpp.i
 .PHONY : src/NeuralNetwork/NeuralNetwork.cpp.i
 
 src/NeuralNetwork/NeuralNetwork.s: src/NeuralNetwork/NeuralNetwork.cpp.s
@@ -222,8 +243,9 @@ src/NeuralNetwork/NeuralNetwork.s: src/NeuralNetwork/NeuralNetwork.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/NeuralNetwork.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/NeuralNetwork.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/NeuralNetwork.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/NeuralNetwork.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/NeuralNetwork.cpp.s
 .PHONY : src/NeuralNetwork/NeuralNetwork.cpp.s
 
 src/NeuralNetwork/backPropagation.o: src/NeuralNetwork/backPropagation.cpp.o
@@ -232,8 +254,9 @@ src/NeuralNetwork/backPropagation.o: src/NeuralNetwork/backPropagation.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/backPropagation.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/backPropagation.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/backPropagation.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/backPropagation.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/backPropagation.cpp.o
 .PHONY : src/NeuralNetwork/backPropagation.cpp.o
 
 src/NeuralNetwork/backPropagation.i: src/NeuralNetwork/backPropagation.cpp.i
@@ -242,8 +265,9 @@ src/NeuralNetwork/backPropagation.i: src/NeuralNetwork/backPropagation.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/backPropagation.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/backPropagation.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/backPropagation.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/backPropagation.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/backPropagation.cpp.i
 .PHONY : src/NeuralNetwork/backPropagation.cpp.i
 
 src/NeuralNetwork/backPropagation.s: src/NeuralNetwork/backPropagation.cpp.s
@@ -252,8 +276,9 @@ src/NeuralNetwork/backPropagation.s: src/NeuralNetwork/backPropagation.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/backPropagation.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/backPropagation.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/backPropagation.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/backPropagation.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/backPropagation.cpp.s
 .PHONY : src/NeuralNetwork/backPropagation.cpp.s
 
 src/NeuralNetwork/feedForward.o: src/NeuralNetwork/feedForward.cpp.o
@@ -262,8 +287,9 @@ src/NeuralNetwork/feedForward.o: src/NeuralNetwork/feedForward.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/feedForward.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/feedForward.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/feedForward.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/feedForward.cpp.o
 .PHONY : src/NeuralNetwork/feedForward.cpp.o
 
 src/NeuralNetwork/feedForward.i: src/NeuralNetwork/feedForward.cpp.i
@@ -272,8 +298,9 @@ src/NeuralNetwork/feedForward.i: src/NeuralNetwork/feedForward.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/feedForward.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/feedForward.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/feedForward.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/feedForward.cpp.i
 .PHONY : src/NeuralNetwork/feedForward.cpp.i
 
 src/NeuralNetwork/feedForward.s: src/NeuralNetwork/feedForward.cpp.s
@@ -282,8 +309,9 @@ src/NeuralNetwork/feedForward.s: src/NeuralNetwork/feedForward.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/feedForward.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/feedForward.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/feedForward.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/feedForward.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/feedForward.cpp.s
 .PHONY : src/NeuralNetwork/feedForward.cpp.s
 
 src/NeuralNetwork/loadWeights.o: src/NeuralNetwork/loadWeights.cpp.o
@@ -292,8 +320,9 @@ src/NeuralNetwork/loadWeights.o: src/NeuralNetwork/loadWeights.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/loadWeights.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/loadWeights.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/loadWeights.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/loadWeights.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/loadWeights.cpp.o
 .PHONY : src/NeuralNetwork/loadWeights.cpp.o
 
 src/NeuralNetwork/loadWeights.i: src/NeuralNetwork/loadWeights.cpp.i
@@ -302,8 +331,9 @@ src/NeuralNetwork/loadWeights.i: src/NeuralNetwork/loadWeights.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/loadWeights.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/loadWeights.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/loadWeights.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/loadWeights.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/loadWeights.cpp.i
 .PHONY : src/NeuralNetwork/loadWeights.cpp.i
 
 src/NeuralNetwork/loadWeights.s: src/NeuralNetwork/loadWeights.cpp.s
@@ -312,8 +342,9 @@ src/NeuralNetwork/loadWeights.s: src/NeuralNetwork/loadWeights.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/loadWeights.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/loadWeights.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/loadWeights.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/loadWeights.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/loadWeights.cpp.s
 .PHONY : src/NeuralNetwork/loadWeights.cpp.s
 
 src/NeuralNetwork/saveWeights.o: src/NeuralNetwork/saveWeights.cpp.o
@@ -322,8 +353,9 @@ src/NeuralNetwork/saveWeights.o: src/NeuralNetwork/saveWeights.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/saveWeights.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/saveWeights.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/saveWeights.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/saveWeights.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/saveWeights.cpp.o
 .PHONY : src/NeuralNetwork/saveWeights.cpp.o
 
 src/NeuralNetwork/saveWeights.i: src/NeuralNetwork/saveWeights.cpp.i
@@ -332,8 +364,9 @@ src/NeuralNetwork/saveWeights.i: src/NeuralNetwork/saveWeights.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/saveWeights.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/saveWeights.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/saveWeights.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/saveWeights.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/saveWeights.cpp.i
 .PHONY : src/NeuralNetwork/saveWeights.cpp.i
 
 src/NeuralNetwork/saveWeights.s: src/NeuralNetwork/saveWeights.cpp.s
@@ -342,8 +375,9 @@ src/NeuralNetwork/saveWeights.s: src/NeuralNetwork/saveWeights.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/saveWeights.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/saveWeights.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/saveWeights.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/saveWeights.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/saveWeights.cpp.s
 .PHONY : src/NeuralNetwork/saveWeights.cpp.s
 
 src/NeuralNetwork/setErrors.o: src/NeuralNetwork/setErrors.cpp.o
@@ -352,8 +386,9 @@ src/NeuralNetwork/setErrors.o: src/NeuralNetwork/setErrors.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/setErrors.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/setErrors.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/setErrors.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/setErrors.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/setErrors.cpp.o
 .PHONY : src/NeuralNetwork/setErrors.cpp.o
 
 src/NeuralNetwork/setErrors.i: src/NeuralNetwork/setErrors.cpp.i
@@ -362,8 +397,9 @@ src/NeuralNetwork/setErrors.i: src/NeuralNetwork/setErrors.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/setErrors.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/setErrors.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/setErrors.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/setErrors.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/setErrors.cpp.i
 .PHONY : src/NeuralNetwork/setErrors.cpp.i
 
 src/NeuralNetwork/setErrors.s: src/NeuralNetwork/setErrors.cpp.s
@@ -372,8 +408,9 @@ src/NeuralNetwork/setErrors.s: src/NeuralNetwork/setErrors.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/setErrors.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/setErrors.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/setErrors.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/setErrors.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/setErrors.cpp.s
 .PHONY : src/NeuralNetwork/setErrors.cpp.s
 
 src/NeuralNetwork/train.o: src/NeuralNetwork/train.cpp.o
@@ -382,8 +419,9 @@ src/NeuralNetwork/train.o: src/NeuralNetwork/train.cpp.o
 
 # target to build an object file
 src/NeuralNetwork/train.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/train.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/train.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/train.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/train.cpp.o
 .PHONY : src/NeuralNetwork/train.cpp.o
 
 src/NeuralNetwork/train.i: src/NeuralNetwork/train.cpp.i
@@ -392,8 +430,9 @@ src/NeuralNetwork/train.i: src/NeuralNetwork/train.cpp.i
 
 # target to preprocess a source file
 src/NeuralNetwork/train.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/train.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/train.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/train.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/train.cpp.i
 .PHONY : src/NeuralNetwork/train.cpp.i
 
 src/NeuralNetwork/train.s: src/NeuralNetwork/train.cpp.s
@@ -402,8 +441,9 @@ src/NeuralNetwork/train.s: src/NeuralNetwork/train.cpp.s
 
 # target to generate assembly for a file
 src/NeuralNetwork/train.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/train.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/NeuralNetwork/train.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/NeuralNetwork/train.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/NeuralNetwork/train.cpp.s
 .PHONY : src/NeuralNetwork/train.cpp.s
 
 src/Neuron.o: src/Neuron.cpp.o
@@ -412,8 +452,9 @@ src/Neuron.o: src/Neuron.cpp.o
 
 # target to build an object file
 src/Neuron.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Neuron.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Neuron.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Neuron.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Neuron.cpp.o
 .PHONY : src/Neuron.cpp.o
 
 src/Neuron.i: src/Neuron.cpp.i
@@ -422,8 +463,9 @@ src/Neuron.i: src/Neuron.cpp.i
 
 # target to preprocess a source file
 src/Neuron.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Neuron.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Neuron.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Neuron.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Neuron.cpp.i
 .PHONY : src/Neuron.cpp.i
 
 src/Neuron.s: src/Neuron.cpp.s
@@ -432,8 +474,9 @@ src/Neuron.s: src/Neuron.cpp.s
 
 # target to generate assembly for a file
 src/Neuron.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Neuron.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/Neuron.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/Neuron.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/Neuron.cpp.s
 .PHONY : src/Neuron.cpp.s
 
 src/autoencoder-extractor.o: src/autoencoder-extractor.cpp.o
@@ -462,6 +505,33 @@ src/autoencoder-extractor.s: src/autoencoder-extractor.cpp.s
 src/autoencoder-extractor.cpp.s:
 	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/autoencoder-extractor.cpp.s
 .PHONY : src/autoencoder-extractor.cpp.s
+
+src/autoencoder-outlier-detector.o: src/autoencoder-outlier-detector.cpp.o
+
+.PHONY : src/autoencoder-outlier-detector.o
+
+# target to build an object file
+src/autoencoder-outlier-detector.cpp.o:
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/autoencoder-outlier-detector.cpp.o
+.PHONY : src/autoencoder-outlier-detector.cpp.o
+
+src/autoencoder-outlier-detector.i: src/autoencoder-outlier-detector.cpp.i
+
+.PHONY : src/autoencoder-outlier-detector.i
+
+# target to preprocess a source file
+src/autoencoder-outlier-detector.cpp.i:
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/autoencoder-outlier-detector.cpp.i
+.PHONY : src/autoencoder-outlier-detector.cpp.i
+
+src/autoencoder-outlier-detector.s: src/autoencoder-outlier-detector.cpp.s
+
+.PHONY : src/autoencoder-outlier-detector.s
+
+# target to generate assembly for a file
+src/autoencoder-outlier-detector.cpp.s:
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/autoencoder-outlier-detector.cpp.s
+.PHONY : src/autoencoder-outlier-detector.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -496,8 +566,9 @@ src/utils/Math.o: src/utils/Math.cpp.o
 
 # target to build an object file
 src/utils/Math.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Math.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Math.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Math.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/utils/Math.cpp.o
 .PHONY : src/utils/Math.cpp.o
 
 src/utils/Math.i: src/utils/Math.cpp.i
@@ -506,8 +577,9 @@ src/utils/Math.i: src/utils/Math.cpp.i
 
 # target to preprocess a source file
 src/utils/Math.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Math.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Math.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Math.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/utils/Math.cpp.i
 .PHONY : src/utils/Math.cpp.i
 
 src/utils/Math.s: src/utils/Math.cpp.s
@@ -516,8 +588,9 @@ src/utils/Math.s: src/utils/Math.cpp.s
 
 # target to generate assembly for a file
 src/utils/Math.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Math.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Math.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Math.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/utils/Math.cpp.s
 .PHONY : src/utils/Math.cpp.s
 
 src/utils/Misc.o: src/utils/Misc.cpp.o
@@ -526,8 +599,9 @@ src/utils/Misc.o: src/utils/Misc.cpp.o
 
 # target to build an object file
 src/utils/Misc.cpp.o:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Misc.cpp.o
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Misc.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Misc.cpp.o
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/utils/Misc.cpp.o
 .PHONY : src/utils/Misc.cpp.o
 
 src/utils/Misc.i: src/utils/Misc.cpp.i
@@ -536,8 +610,9 @@ src/utils/Misc.i: src/utils/Misc.cpp.i
 
 # target to preprocess a source file
 src/utils/Misc.cpp.i:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Misc.cpp.i
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Misc.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Misc.cpp.i
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/utils/Misc.cpp.i
 .PHONY : src/utils/Misc.cpp.i
 
 src/utils/Misc.s: src/utils/Misc.cpp.s
@@ -546,8 +621,9 @@ src/utils/Misc.s: src/utils/Misc.cpp.s
 
 # target to generate assembly for a file
 src/utils/Misc.cpp.s:
-	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Misc.cpp.s
 	$(MAKE) -f CMakeFiles/openann.dir/build.make CMakeFiles/openann.dir/src/utils/Misc.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-extractor.dir/build.make CMakeFiles/autoencoder-extractor.dir/src/utils/Misc.cpp.s
+	$(MAKE) -f CMakeFiles/autoencoder-outlier-detector.dir/build.make CMakeFiles/autoencoder-outlier-detector.dir/src/utils/Misc.cpp.s
 .PHONY : src/utils/Misc.cpp.s
 
 # Help Target
@@ -556,10 +632,11 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... autoencoder-extractor"
 	@echo "... rebuild_cache"
 	@echo "... openann"
+	@echo "... autoencoder-extractor"
+	@echo "... autoencoder-outlier-detector"
+	@echo "... edit_cache"
 	@echo "... src/Layer.o"
 	@echo "... src/Layer.i"
 	@echo "... src/Layer.s"
@@ -593,6 +670,9 @@ help:
 	@echo "... src/autoencoder-extractor.o"
 	@echo "... src/autoencoder-extractor.i"
 	@echo "... src/autoencoder-extractor.s"
+	@echo "... src/autoencoder-outlier-detector.o"
+	@echo "... src/autoencoder-outlier-detector.i"
+	@echo "... src/autoencoder-outlier-detector.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

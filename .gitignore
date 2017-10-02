@@ -29,6 +29,9 @@ massif*
 # ignore csv file
 *.csv
 
+# utility scripts
+bin/*.sh
+
 *.out
 *.out.*
 

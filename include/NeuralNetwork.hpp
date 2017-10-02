@@ -1,8 +1,7 @@
 #ifndef _NEURAL_NETWORK_HPP_
 #define _NEURAL_NETWORK_HPP_
 
-#define COST_SIMPLE 1
-#define COST_RELU 2
+#define COST_MSE 1
 
 #include <iostream>
 #include <fstream>
@@ -64,7 +63,6 @@ public:
   void printInputToConsole();
   void printOutputToConsole();
   void printTargetToConsole();
-  void printHistoricalErrors();
 
   void saveWeights(string filename);  // Saves weights as a json file
   void loadWeights(string filename);  // Load weights from a json file
@@ -80,7 +78,7 @@ public:
   int               topologySize;
   int               hiddenActivationType  = 2; // relu for hidden by default
   int               outputActivationType  = 3; // sigmoid for output by default
-  int               costFunctionType      = 1; // simple cost function (target - guess)
+  int               costFunctionType      = 1; // simple cost function 0.5 * (target - guess)^2
   vector<int>       topology;
   vector<Layer *>   layers;
   vector<Matrix *>  weightMatrices;
@@ -92,10 +90,12 @@ public:
   double            learningRate;
   double            bias;
   vector<double>    errors;
-  vector<double>    historicalErrors;
 
   vector<vector<double> > trainingData;
   vector<vector<double> > labelData;
+
+private:
+  void setErrorMSE();
 };
 
 #endif

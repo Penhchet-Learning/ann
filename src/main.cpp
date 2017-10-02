@@ -44,6 +44,11 @@ int main(int argc, char **argv) {
   cout << "HIDDEN ACTIVATION: " << hiddenActivationType << endl;
   cout << "OUTPUT ACTIVATION: " << outputActivationType << endl;
   cout << "COST FUNCTION: " << costFunctionType << endl;
+  cout << "TOPOLOGY: ";
+  for(int i = 0; i < topology.size(); i++) {
+    cout << " " << topology.at(i);
+  }
+  cout << endl;
 
   NeuralNetwork *nn = new NeuralNetwork(
                         topology,
@@ -63,8 +68,9 @@ int main(int argc, char **argv) {
   cout << "Starting training..." << endl;
   int epoch = 1;
 
-  vector<double> histAveError;
-  double aveError = 999;
+  //vector<double> histAveError;
+  double aveError   = 0;
+  double prevError  = 10000000;
   clock_t t;
 
   vector<vector<double> > data    = utils::Misc::fetchCSVData(trainingData);
@@ -72,8 +78,9 @@ int main(int argc, char **argv) {
 
   cout << "Data size: " << data.size() << " Label size: " << labels.size() << endl;
 
+  int overfittingCounter  = 0;
   while(epoch <= epochThreshold) {
-    t = clock();
+    //t = clock();
     for(int i = 0; i < data.size(); i++) {
       nn->train(data.at(i), labels.at(i), bias, learningRate, momentum);
       aveError += nn->getTotalError();
@@ -81,22 +88,36 @@ int main(int argc, char **argv) {
 
     aveError = aveError / data.size();
 
-    histAveError.push_back(aveError);
+    //histAveError.push_back(aveError);
     cout << aveError << endl;
 
-    t = clock() - t;
+    //t = clock() - t;
     //printf ("It took %f seconds for a single epoch.\n",t,((float)t)/CLOCKS_PER_SEC);
 
     // save weights at every iteration
     //nn->printToConsole();
     //cout << endl;
     nn->saveWeights(outputWeights);
+    //wcout << "ERR Threshold: " << errorThreshold << " AveErr: " << aveError << endl;
 
     if(aveError < errorThreshold) {
       cout << "Error below threshold" << endl;
       break;
+    } else if(aveError == prevError) {
+      cout << "Convergence reached. Error: " << aveError << endl;
+      break;
+    } else if(aveError > prevError) {
+      if(overfittingCounter > 1000) {
+        cout << "Overfitting... aveErr: " << aveError << " prevError: " << prevError << endl;
+        break;
+      } else {
+        overfittingCounter++;
+      }
+    } else {
+      prevError = aveError;
     }
 
+    aveError = 0;
     epoch++;
   }
 
