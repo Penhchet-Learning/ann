@@ -1,0 +1,132 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Training Neural Networks}
+\author{CS 129.18 Quiz}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Answer the following problems by performing feed forward and backpropagation twice for training and a final feed forward using the trained weights (i.e. Feed forward and backprop, Feed forward and backprop and another feed forward using the final weights). For the starting weights, use random numbers from 0 to 0.99 (you can use excel's rand() for this). Submit your solutions and make sure they indicate the starting weights for each problem as well the numbers generated for $Z$ neurons and change in weights $\Delta{W}$ and the change in errors $E = [e_1, e_2, e_3, ...]$ for each iteration.
+\end{abstract}
+
+\section{Problem A}
+
+Given the following:
+
+\begin{enumerate}
+\item Topology: $[3, 2, 3, 2]$
+\item Input: $[1, 0, 1]$
+\item Output: $[1, 0]$
+\item Cost Function: $(y - \widehat{y})^2$
+\item Activation Scheme: Relu, Relu, Sigmoid
+\item Weights:
+\end{enumerate}
+
+
+\begin{equation}
+  W_{1}=\begin{bmatrix}
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i}
+  \end{bmatrix}
+  W_{2}=\begin{bmatrix}
+    w_{i} &   w_{i} & w_{i}\\
+    w_{i} &   w_{i} & w_{i}\\
+  \end{bmatrix}
+  W_{3}=\begin{bmatrix}
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i}
+  \end{bmatrix}
+\end{equation}
+
+\section{Problem B}
+
+Given the following:
+
+\begin{enumerate}
+\item Topology: $[5, 4, 3, 2]$
+\item Input: $[1, 0, 0.8, 0.9, 0.8]$
+\item Output: $[1, 0]$
+\item Cost Function: $(y - \widehat{y})^2$
+\item Activation Scheme: Sigmoid, Sigmoid, Sigmoid
+\item Weights:
+\end{enumerate}
+
+
+\begin{equation}
+  W_{1}=\begin{bmatrix}
+    i_{i} &   i_{i} & i_{i} & i_{i} \\
+    i_{i} &   i_{i} & i_{i} & i_{i} \\
+    i_{i} &   i_{i} & i_{i} & i_{i} \\
+    i_{i} &   i_{i} & i_{i} & i_{i} \\
+    i_{i} &   i_{i} & i_{i} & i_{i}
+  \end{bmatrix}
+  W_{2}=\begin{bmatrix}
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i}
+  \end{bmatrix}
+  W_{3}=\begin{bmatrix}
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i}
+  \end{bmatrix}
+\end{equation}
+
+\section{Problem C}
+
+Given the following:
+
+\begin{enumerate}
+\item Topology: $[5, 3, 2, 3, 5]$
+\item Input: $[0.9, 0.8, 0.9, 0.2, 0.3]$
+\item Output: $[0.9, 0.8, 0.9, 0.2, 0.3]$
+\item Cost Function: $(y - \widehat{y})^2$
+\item Activation Scheme: Relu, Relu, Relu, Relu
+\item Weights:
+\end{enumerate}
+
+
+\begin{equation}
+  W_{1}=\begin{bmatrix}
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i}
+  \end{bmatrix}
+  W_{2}=\begin{bmatrix}
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i} \\
+    w_{i} &   w_{i}
+  \end{bmatrix}
+  W_{3}=\begin{bmatrix}
+    w_{i} &   w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} \\
+  \end{bmatrix}
+  W_{4}=\begin{bmatrix}
+    w_{i} &   w_{i} & w_{i} & w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} & w_{i} & w_{i} \\
+    w_{i} &   w_{i} & w_{i} & w_{i} & w_{i}
+  \end{bmatrix}
+\end{equation}
+
+\end{document}
