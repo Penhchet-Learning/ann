@@ -108,7 +108,7 @@ NeuralNetwork::NeuralNetwork(
       cerr << "Invalid topology. Should be odd number in size" << endl;
       exit(-1);
     }
-  //} else if(mode.compare("classifier") == 0) {
+  } else if(mode.compare("classifier") == 0) {
   } else {
     cerr << "Invalid mode " << mode << endl;
     exit(-1);
@@ -196,6 +196,7 @@ NeuralNetwork::NeuralNetwork(
   // Initialize empty errors
   for(int i = 0; i < topology.at(topology.size() - 1); i++) {
     errors.push_back(0.00);
+    derivedErrors.push_back(0.00);
   }
 
   this->error = 0.00;

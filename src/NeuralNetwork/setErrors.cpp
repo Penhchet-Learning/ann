@@ -29,7 +29,9 @@ void NeuralNetwork::setErrorMSE() {
   for(int i = 0; i < target.size(); i++) {
     double t        = target.at(i);
     double y        = outputNeurons.at(i)->getActivatedVal();
-    errors.at(i)    = 0.5 * pow(abs((t - y)), 2);
+    //errors.at(i)    = 0.5 * pow(abs((t - y)), 2);
+    errors.at(i)    = pow(abs((t - y)), 2);
+    derivedErrors.at(i)    = (y - t);
     this->error     += errors.at(i);
   }
 }

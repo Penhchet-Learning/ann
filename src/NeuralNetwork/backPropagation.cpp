@@ -34,9 +34,9 @@ void NeuralNetwork::backPropagation() {
                             false
                           );
 
-  for(int i = 0; i < this->errors.size(); i++) {
+  for(int i = 0; i < this->derivedErrors.size(); i++) {
     double d  = derivedValuesYToZ->getValue(0, i);
-    double e  = this->errors.at(i);
+    double e  = this->derivedErrors.at(i);
     double g  = d * e;
     gradientsYToZ->setValue(0, i, g);
   }
@@ -162,10 +162,10 @@ void NeuralNetwork::backPropagation() {
         double d  = deltaWeights->getValue(r, c);
 
         // with momentum
-        w = this->momentum * w;
+        //w = this->momentum * w;
 
         // with learninng rate
-        d = this->learningRate * d;
+        //d = this->learningRate * d;
 
         double n  = w - d;
         newWeightsHidden->setValue(r, c, n);

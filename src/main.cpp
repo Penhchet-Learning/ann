@@ -45,9 +45,6 @@ int main(int argc, char **argv) {
   cout << "OUTPUT ACTIVATION: " << outputActivationType << endl;
   cout << "COST FUNCTION: " << costFunctionType << endl;
   cout << "TOPOLOGY: ";
-  for(int i = 0; i < topology.size(); i++) {
-    cout << " " << topology.at(i);
-  }
   cout << endl;
 
   NeuralNetwork *nn = new NeuralNetwork(
@@ -98,7 +95,7 @@ int main(int argc, char **argv) {
     //nn->printToConsole();
     //cout << endl;
     nn->saveWeights(outputWeights);
-    //wcout << "ERR Threshold: " << errorThreshold << " AveErr: " << aveError << endl;
+    //cout << "ERR Threshold: " << errorThreshold << " AveErr: " << aveError << endl;
 
     if(aveError < errorThreshold) {
       cout << "Error below threshold" << endl;
@@ -121,5 +118,6 @@ int main(int argc, char **argv) {
     epoch++;
   }
 
+  //nn->printToConsole();
   return 0;
 }

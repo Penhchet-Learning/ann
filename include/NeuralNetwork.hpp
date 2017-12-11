@@ -90,6 +90,7 @@ public:
   double            learningRate;
   double            bias;
   vector<double>    errors;
+  vector<double>    derivedErrors;
 
   vector<vector<double> > trainingData;
   vector<vector<double> > labelData;

@@ -68,18 +68,18 @@ For the rest of the discussion, we will be referring to figure 2 as reference. I
 \begin{equation}
   W_{1}=
     \begin{bmatrix}
-      0.15  & 0.14 \\
-      0.02  & 0.24 \\
-      0.62  & 0.20 \\
-      0.34  & 0.25 \\
+      0.16  & 0.16 \\
+      0.02  & 0.25 \\
+      0.63  & 0.22 \\
+      0.36  & 0.29 \\
     \end{bmatrix}
 \end{equation}
 
 \begin{equation}
   W_{2}=
     \begin{bmatrix}
-      0.22 & 0.07 & 0.58 \\
-      0.59 & 0.55 & 0.77
+      0.05 & 0.33 & 0.72 \\
+      0.43 & 0.79 & 0.91
     \end{bmatrix}
 \end{equation}
 
@@ -90,7 +90,7 @@ The feed forward process can be thought of the movement of information from the 
 We're trying to solve for the values of $Z$ by matrix multiplying $X$ with $W_{1}$. The result will then be passed to an activation function such as the \textbf{sigmoid function} given by:
 
 \begin{equation}
-  a(x) = 1 / (1 + e^{-x})
+  a(x) = \frac{1}{(1 + e^{-x})}
 \end{equation}
 
 Mathematically, we can then represent information flow from $X$ to $Z$:
@@ -106,26 +106,26 @@ Numerically we have the following:
       0.2 & 0.1 & 0.3 & 0.5
     \end{bmatrix}
     \begin{bmatrix}
-      0.15  & 0.14 \\
-      0.02  & 0.24 \\
-      0.62  & 0.20 \\
-      0.34  & 0.25 \\
+      0.16  & 0.16 \\
+      0.02  & 0.25 \\
+      0.63  & 0.22 \\
+      0.36  & 0.29 \\
     \end{bmatrix}
 \end{equation}
 
 \begin{equation}
   Z=\begin{bmatrix}
-      0.388 & 0.237
+      0.403 & 0.268
     \end{bmatrix}
 \end{equation}
 \begin{equation}
   Z=a(\begin{bmatrix}
-      0.388 & 0.237
+      0.403 & 0.268
     \end{bmatrix})
 \end{equation}
 \begin{equation}
   Z=\begin{bmatrix}
-      0.5958 & 0.5590
+      0.60 & 0.57
     \end{bmatrix}
 \end{equation}
 
@@ -141,29 +141,29 @@ Numerically:
 
 \begin{equation}
   Y=\begin{bmatrix}
-      0.5958 & 0.5590
+      0.60 & 0.57
     \end{bmatrix}
     \begin{bmatrix}
-      0.22 & 0.07 & 0.58 \\
-      0.59 & 0.55 & 0.77
+      0.05 & 0.33 & 0.72 \\
+      0.43 & 0.79 & 0.91
     \end{bmatrix}
 \end{equation}
 
 \begin{equation}
   Y=\begin{bmatrix}
-      0.4609 & 0.3491 & 0.7760
+      0.28 & 0.65 & 0.95
     \end{bmatrix}
 \end{equation}
 
 \begin{equation}
   Y=a(\begin{bmatrix}
-      0.4609 & 0.3491 & 0.7760
+      0.28 & 0.65 & 0.95
     \end{bmatrix})
 \end{equation}
 
 \begin{equation}
   Y=\begin{bmatrix}
-      0.6132 & 0.5864 & 0.6848
+      0.57 & 0.66 & 0.72
     \end{bmatrix}
 \end{equation}
 
@@ -172,25 +172,23 @@ Numerically:
 The loss function determines how far (or close) the guess of the network ($Y$) to the actual classification value ($\widehat{Y}$). Remember that we want to teach the network how to recognize a certain classification by adjusting the its weights. The amount of adjustment we do will largely depend on the value given by the \textbf{loss function}. For this paper, we will be using a very simple loss function:
 
 \begin{equation}
-  E(Y, \widehat{Y})=\sum_{i}^{n} {(Y_{i}-\widehat{Y_{i}})^2}
+  E(Y, \widehat{Y})=\sum_{i}^{n} {\frac{1}{2}(Y_{i}-\widehat{Y_{i}})^2}
 \end{equation}
 
 In the case of our example, $\widehat{Y}=\begin{bmatrix}1 & 0 & 0\end{bmatrix}$, the value of our loss function will be computed as:
 
 \begin{equation}
-  E(Y, \widehat{Y})=\sum_{i}^{n}(\begin{bmatrix}0.6132 & 0.5864 & 0.6848\end{bmatrix} - \begin{bmatrix}1 & 0 & 0\end{bmatrix})^2
+  E(Y, \widehat{Y})=\frac{1}{2}(0.57 - 1)^2 + \frac{1}{2}(0.66 - 0)^2 + \frac{1}{2}(0.72 - 0)^2
 \end{equation}
 
-Decomposing it we have:
-
 \begin{equation}
-  e_{1} = (0.6132 - 1)^2
+  e_{1} = \frac{1}{2}(0.57 - 1)^2
 \end{equation}
 \begin{equation}
-  e_{2} = (0.5864 - 0)^2
+  e_{2} = \frac{1}{2}(0.66 - 0)^2
 \end{equation}
 \begin{equation}
-  e_{3} = (0.6848 - 0)^2
+  e_{3} = \frac{1}{2}(0.72 - 0)^2
 \end{equation}
 
 \begin{equation}
@@ -198,10 +196,10 @@ Decomposing it we have:
 \end{equation}
 
 \begin{equation}
-  E(Y, \widehat{Y})=0.1496 + 0.3439 + 0.4690
+  E(Y, \widehat{Y})=0.09245 + 0.2178 + 0.2592
 \end{equation}
 \begin{equation}
-  E(Y, \widehat{Y})=0.9624
+  E(Y, \widehat{Y})=0.56945
 \end{equation}
 
 \subsection{Back Propagation}
@@ -211,71 +209,226 @@ Once we get the error value from the loss function, we can use this value to det
 For a more specific example, we'll break down this process into two major operations. The first part will perform back propagation starting from the output to the last hidden layer. And the second part will be from the last hidden layer down to the input layer. Similar to feed forward, we will be computing values with 3 inputs -- 2 layers and the weight matrix in between them. For each pair of layers, the gradient values to be computed for the right layer.
 
 \subsubsection{BP from Output to Last Hidden Layer}
-To start off, we compute the gradients for the right layer in this part of BP which in this case is the output layer ($Y$).
+To start off, we compute the gradients for the right layer in this part of BP which in this case is the output layer ($Y$). Gradients are computed by taking the product of the first derivatives of equations used in the model. Take the \textbf{loss function} for each $y_{i}$ for instance:
+
+\begin{equation}
+  e_{i}={\frac{1}{2}(y_{i}-\widehat{y_{i}})^2}
+\end{equation}
+
+The first derivative $e_{i}'$ for the \textbf{loss function} would be:
+
+\begin{equation}
+  e_{i}'={\widehat{y_{i}} - y_{i}}
+\end{equation}
+
+We also take the derivative for the neurons in the right layer (output layer in this case) which we will refer to as $Y'$. The activation function we used was:
+
+\begin{equation}
+  a(x) = \frac{1}{1 + e^{-x}}
+\end{equation}
+
+The derivative a given output $y'_{i}$ would approximately be:
+
+\begin{equation}
+  y_i'=a(x)(1-a(x))
+\end{equation}
+
+\begin{equation}
+  y_i'=y_{i}(1-y_{i})
+\end{equation}
+
+Given these derivatives, we can then compute for our gradients $G_{h}$ (with a one to one correspondence to the right layer / output layer in this case). We can do this by using the following equation:
+
+\begin{equation}
+  G=\begin{bmatrix}
+          (e_{1}')(y_{1}') & (e_{2}')(y_{2}') & (e_{3}')(y_{3}')
+        \end{bmatrix}
+\end{equation}
+
+Plugging in the necessary values we have:
+
+\begin{equation}
+  G=\begin{bmatrix}
+          (0.09245)(0.2451) & (0.2178)(0.2244) & (0.2592)(0.2016)
+        \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+  G=\begin{bmatrix}
+          0.022679495 & 0.04887432 & 0.052255
+        \end{bmatrix}
+\end{equation}
+
+Once we have the gradient values, we can use these to compute for the the change in weight $\delta{W_{2}}$ which will subtract from the original weights to get the updated weights $\widehat{W_{2}}$ (we're at index $2$ because again we're moving from the last layer down to the input layer). At this part of the process, delta weights can be computed by multiplying the transpose of our gradients $G$ with the output of the left layer -- in this case $Z$. We then transpose the result to have the same shape as $W_{2}$.
+
+\begin{equation}
+  \delta{W_{2}}=(G^{T}Z)^{T}
+\end{equation}
+
+Plugging in the values we have:
+
+\begin{equation}
+  \delta{W_{2}}=(\begin{bmatrix}
+                  0.022679495 \\
+                  0.04887432 \\
+                  0.052255
+                \end{bmatrix}
+                \begin{bmatrix}
+                  0.60 & 0.57
+                \end{bmatrix})^{T}
+\end{equation}
+
+\begin{equation}
+  \delta{W_{2}}=(\begin{bmatrix}
+                  0.013596 & 0.012916 \\
+                  0.029325 & 0.027858 \\
+                  0.031353 & 0.029785
+                \end{bmatrix})^{T}
+\end{equation}
+
+\begin{equation}
+  \delta{W_{2}}=\begin{bmatrix}
+                  0.013596 & 0.029325 & 0.031353 \\
+                  0.012916 & 0.027858 & 0.029785
+                \end{bmatrix}
+\end{equation}
+
+Finally we can update the weights from $Z$ to $Y$:
+
+\begin{equation}
+  \widehat{W_{2}}=W_{2} - \delta{W_{2}}
+\end{equation}
+
+\begin{equation}
+  \widehat{W_{2}}=
+    \begin{bmatrix}
+      0.05 & 0.33 & 0.72 \\
+      0.43 & 0.79 & 0.91
+    \end{bmatrix}
+    -
+    \begin{bmatrix}
+      0.013596 & 0.029325 & 0.031353 \\
+      0.012916 & 0.027858 & 0.029785
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+  \widehat{W_{2}}=
+    \begin{bmatrix}
+      0.036404 & 0.300675 & 0.688647 \\
+      0.417084 & 0.762142 & 0.880215
+    \end{bmatrix}
+\end{equation}
 
 \subsubsection{BP from Last Hidden to Input Layer}
 
-\section{Some examples to get started}
+Computing the gradients and updated weights from the last hidden layer $Z$ down to the input layer $X$ is a bit different but generally follows the same process. Probably the major difference in this step of back propagation is to apply the gradients computed in the last operation (gradients corresponding to $Y$) as part of the computation. We shall refer to this as $G_{p}$ where:
 
-\[ \left( \begin{array}{cc}
-1 & 0 \\
-0 & 1
-\end{array} \right)^{T}
-%
-=
-\left( \begin{array}{cc}
-1 & 0 \\
-0 & 1
-\end{array} \right)
-\]
+\begin{equation}
+  G_{p} = G
+\end{equation}
 
-\subsection{How to add Comments}
+We then have to solve for a new $G$ which corresponds to the gradients of the right layer in this operation ($Z$). Aside from taking the previous operation's gradients, we have to also account for the old weights in the previous operation ($W_{2}$). We then matrix multiply $G_{p}$ with with the transpose of $W_{2}$ to give us the same shape as the right layer $Z$. This result will then be multiplied element-wise with the derivatives of $Z$ -- $Z'$. The operation would then be as follows:
 
-Comments can be added to your project by clicking on the comment icon in the toolbar above. % * <john.hammersley@gmail.com> 2016-07-03T09:54:16.211Z:
-%
-% Here's an example comment!
-%
-To reply to a comment, simply click the reply button in the lower right corner of the comment, and you can close them when you're done.
+\begin{equation}
+  G = (G_{p}W_{p}^T) \times Z'
+\end{equation}
 
-Comments can also be added to the margins of the compiled PDF using the todo command\todo{Here's a comment in the margin!}, as shown in the example on the right. You can also add inline comments:
+Let's solve for the derivatives $Z'$ first using the same derivative equation as $Y'$:
 
-\todo[inline, color=green!40]{This is an inline comment.}
+\begin{equation}
+  Z'=
+    \begin{bmatrix}
+      z'_{1} & z'_{2}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      (0.60)(1 - 0.60) & (0.57)(1 - 0.57)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      0.24 & 0.2451
+    \end{bmatrix}
+\end{equation}
 
-\subsection{How to write Mathematics}
+Next we solve for $G_{p}W_{p}^T$:
 
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-\[S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i\]
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+\begin{equation}
+  G_{p}=
+    \begin{bmatrix}
+      0.022679495 & 0.04887432 & 0.052255
+    \end{bmatrix}
+\end{equation}
 
+\begin{equation}
+  W_{p}^T=
+    \begin{bmatrix}
+      0.05 & 0.43 \\
+      0.33 & 0.79 \\
+      0.72 & 0.91
+    \end{bmatrix}
+\end{equation}
 
-\subsection{How to create Sections and Subsections}
+\begin{equation}
+  G_{p}W_{p}^T=
+    \begin{bmatrix}
+      0.022679495 & 0.04887432 & 0.052255
+    \end{bmatrix}
+    \begin{bmatrix}
+      0.05 & 0.43 \\
+      0.33 & 0.79 \\
+      0.72 & 0.91
+    \end{bmatrix}
+\end{equation}
 
-Use section and subsections to organize your document. Simply use the section and subsection buttons in the toolbar to create them, and we'll handle all the formatting and numbering automatically.
+\begin{equation}
+  G_{p}W_{p}^T=
+    \begin{bmatrix}
+      0.054885 & 0.095906
+    \end{bmatrix}
+\end{equation}
 
-\subsection{How to add Lists}
+Finally putting them all together to solve for $G = (G_{p}W_{p}^T) \times Z'$:
 
-You can make lists with automatic numbering \dots
+\begin{equation}
+  G=
+    \begin{bmatrix}
+      0.054885 & 0.095906
+    \end{bmatrix}
+    \times
+    \begin{bmatrix}
+      0.24 & 0.2451
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      0.0131723757 & 0.02350658
+    \end{bmatrix}
+\end{equation}
 
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}
-\item Like this,
-\item and like this.
-\end{itemize}
+We can then extract the delta weights $\delta{W_{1}}$ using the following:
 
-\subsection{How to add Citations and a References List}
+\begin{equation}
+  \delta{W_{1}} = X^TG_h
+\end{equation}
 
-You can upload a \verb|.bib| file containing your BibTeX entries, created with JabRef; or import your \href{https://www.overleaf.com/blog/184}{Mendeley}, CiteULike or Zotero library as a \verb|.bib| file. You can then cite entries from it, like this: \cite{greenwade93}. Just remember to specify a bibliography style, as well as the filename of the \verb|.bib|.
+Plugging in the values we have:
 
-You can find a \href{https://www.overleaf.com/help/97-how-to-include-a-bibliography-using-bibtex}{video tutorial here} to learn more about BibTeX.
+If you have a deeper neural network, then we can apply the equations above to the next consecutive layers.
 
-We hope you find Overleaf useful, and please let us know if you have any feedback using the help menu above --- or use the contact form at \url{https://www.overleaf.com/contact}!
+To test if we have indeed trained the network, we'll use the same input and perform a feed forward using the updated weights. Our neural network will now look like the following:
 
-\bibliographystyle{alpha}
-\bibliography{sample}
+This can be mathematically expressed:
+
+\begin{equation}
+  Z=a(XW_{1})
+\end{equation}
+
+\begin{equation}
+  Y=a(ZW_{2})
+\end{equation}
+
+Plugging in the values we have:
+
+Finally we use the \textbf{loss function} to see if the network has improved (lower total error will incidcate improvement):
 
 \end{document}
